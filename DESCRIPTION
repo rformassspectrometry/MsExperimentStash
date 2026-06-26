@@ -40,7 +40,7 @@ Suggests:
     callr,
     fs
 Remotes:
-    RforMassSpectrometry/MsStash
+    RforMassSpectrometry/MsStash,
     RforMassSpectrometry/SpectraStash
 License: GPL-3
 Encoding: UTF-8
