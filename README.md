@@ -2,6 +2,8 @@
 
 *A safe way to store your `MsExperiment` objects in interoperable formats.*
 
+[![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
+[![codecov](https://codecov.io/gh/rformassspectrometry/MsExperimentStash/graph/badge.svg?token=bSIyfw4y5K)](https://codecov.io/gh/rformassspectrometry/MsExperimentStash)
 [![license](https://img.shields.io/badge/license-GPL--3.0-brightgreen.svg)](https://opensource.org/license/gpl-3.0)
 
 ---
