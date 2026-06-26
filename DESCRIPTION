@@ -1,0 +1,51 @@
+Package: MsExperimentStash
+Title: Serialize and restore MsExperiment objects in interoperable file formats
+Version: 0.97.0
+Authors@R:
+    c(person(given = "Johannes", family = "Rainer",
+             email = "Johannes.Rainer@eurac.edu",
+             role = c("aut", "cre"),
+             comment = c(ORCID = "0000-0002-6977-7147")),
+      person(given = "Philippine", family = "Louail",
+             email = "philippine.louail@eurac.edu",
+             role = "aut",
+             comment = c(ORCID = "0009-0007-5429-6846")),
+      person(given = "Laurent", family = "Gatto",
+             email = "laurent.gatto@uclouvain.be",
+             role = "ctb",
+             comment = c(ORCID = "0000-0002-1520-2268")),
+      person(given = "Gabriele", family = "Tomè",
+             email = "gabriele.tome@eurac.edu",
+             role = c("ctb"),
+             comment = c(ORCID = "0000-0002-3976-6068",
+             fnd = "MetaRbolomics4Galaxy project (CUP: D53C25001030003) co-funded by the Autonomous Province of Bolzano under the Joint Projects South Tyrol–Germany 2025 program.")))
+Description: The serialization mechanism of R allows to save and load R data
+             objects in a binary format, that can however not be read by other
+             programming languages or software. The MsExperimentStash package
+             implements the serialization methods from the MsStash package for
+             MsExperiment objects. Data can be stashed in a variety of file
+	     formats and types, including HDF5 and JSON-based formats
+             defined by the Bioconductor *alabaster* package.
+Depends:
+    R (>= 4.6.0),
+    MsStash
+Imports:
+    methods,
+    alabaster.base,
+    MsExperiment
+Suggests:
+    BiocStyle,
+    testthat,
+    pkgload,
+    callr,
+    fs
+Remotes:
+    RforMassSpectrometry/MsStash,
+    RforMassSpectrometry/SpectraStash
+License: GPL-3
+Encoding: UTF-8
+BugReports: https://github.com/RforMassSpectrometry/MsExperimentStash/issues
+URL: https://github.com/RforMassSpectrometry/MsExperimentStash
+biocViews: Infrastructure, MassSpectrometry, Metabolomics, DataImport, Proteomics
+Roxygen: list(markdown=TRUE)
+Config/roxygen2/version: 8.0.0
