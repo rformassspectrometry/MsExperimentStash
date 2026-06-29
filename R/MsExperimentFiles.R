@@ -10,6 +10,15 @@
 #' The supported stash formats for `MsExperimentFiles` objects are listed in
 #' the sections below.
 #'
+#' @section Text-file format, `PlainTextParam`:
+#'
+#' The text-file format stash folder for `MsExperimentFile` objects contains
+#' a file *ms_experiment_files.txt* with two tabulator separated columns *name*
+#' and *files*. Each row (except the first) is one element of the
+#' `MsExperimentFile`, the first defining the object's names and the second
+#' its content, which represents a characted vector with the file name(s),
+#' separated by a `"|"` (if more than one).
+#'
 #' @section *alabaster*-based format, `AlabasterParam`:
 #'
 #' The `MsExperimentFiles` stash folder contains the alabaster-specific
@@ -18,7 +27,7 @@
 #'
 #' @param object An `MsExperimentFiles` object.
 #'
-#' @param param An `AlabasterParam`.
+#' @param param An [MsStash::AlabasterParam] or [MsStash::PlainTextParam].
 #'
 #' @param path For `saveObject()`: `character(1)` with the path where the
 #'     object should be stored into.
@@ -62,6 +71,47 @@ NULL
 ##    PlainTextParam
 ################################################################################
 
+#' @importClassesFrom MsStash PlainTextParam
+#'
+#' @importFrom utils write.table
+#'
+#' @rdname MsExperimentFilesStash
+setMethod("saveMsObject", signature(object = "MsExperimentFiles",
+                                    param = "PlainTextParam"),
+          function(object, param, ...) {
+              dir.create(path = param@path, recursive = TRUE,
+                         showWarnings = FALSE)
+              .check_overwriting(
+                  file.path(param@path, "ms_experiment_files.txt"))
+              if (length(object))
+                  d <- data.frame(
+                      name = names(object),
+                      files = vapply(object, paste0, "", collapse = "|",
+                                     USE.NAMES = FALSE))
+              else d <- data.frame(name = character(), files = character())
+              write.table(
+                  d, file = file.path(param@path, "ms_experiment_files.txt"),
+                  sep = "\t", row.names = FALSE)
+          })
+
+#' @importFrom MsExperiment MsExperimentFiles
+#'
+#' @importFrom utils read.table
+#'
+#' @rdname MsExperimentFilesStash
+setMethod("readMsObject", signature(object = "MsExperimentFiles",
+                                    param = "PlainTextParam"),
+          function(object, param, ...) {
+              .check_directory_content(param@path, c("ms_experiment_files.txt"))
+              d <- read.table(file.path(param@path, "ms_experiment_files.txt"),
+                              sep = "\t", header = TRUE)
+              if (nrow(d)) {
+                  l <- strsplit(d[, 2L], "|", fixed = TRUE)
+                  names(l) <- d[, 1L]
+                  MsExperimentFiles(l)
+              } else MsExperimentFiles()
+          })
+
 ################################################################################
 ##    AlabasterParam
 ################################################################################
@@ -103,6 +153,8 @@ readAlabasterMsExperimentFiles <- function(path = character(),
 #' @rdname MsExperimentFilesStash
 #'
 #' @importMethodsFrom MsStash saveMsObject
+#'
+#' @importClassesFrom MsStash AlabasterParam
 setMethod("saveMsObject", signature(object = "MsExperimentFiles",
                                     param = "AlabasterParam"),
           function(object, param, ...) {
