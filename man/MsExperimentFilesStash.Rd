@@ -2,11 +2,17 @@
 % Please edit documentation in R/MsExperimentFiles.R
 \name{MsExperimentFilesStash}
 \alias{MsExperimentFilesStash}
+\alias{saveMsObject,MsExperimentFiles,PlainTextParam-method}
+\alias{readMsObject,MsExperimentFiles,PlainTextParam-method}
 \alias{saveObject,MsExperimentFiles-method}
 \alias{saveMsObject,MsExperimentFiles,AlabasterParam-method}
 \alias{readMsObject,MsExperimentFiles,AlabasterParam-method}
 \title{Stash for \code{MsExperimentFiles}}
 \usage{
+\S4method{saveMsObject}{MsExperimentFiles,PlainTextParam}(object, param, ...)
+
+\S4method{readMsObject}{MsExperimentFiles,PlainTextParam}(object, param, ...)
+
 \S4method{saveObject}{MsExperimentFiles}(x, path, ...)
 
 \S4method{saveMsObject}{MsExperimentFiles,AlabasterParam}(object, param, ...)
@@ -14,16 +20,16 @@
 \S4method{readMsObject}{MsExperimentFiles,AlabasterParam}(object, param, ...)
 }
 \arguments{
+\item{object}{An \code{MsExperimentFiles} object.}
+
+\item{param}{An \link[MsStash:AlabasterParam]{MsStash::AlabasterParam} or \link[MsStash:PlainTextParam]{MsStash::PlainTextParam}.}
+
+\item{...}{Currently ignored.}
+
 \item{x}{An \code{MsExperimentFiles} object.}
 
 \item{path}{For \code{saveObject()}: \code{character(1)} with the path where the
 object should be stored into.}
-
-\item{...}{Currently ignored.}
-
-\item{object}{An \code{MsExperimentFiles} object.}
-
-\item{param}{An \code{AlabasterParam}.}
 }
 \value{
 \code{readMsObject()} returns a \link[MsExperiment:MsExperimentFiles]{MsExperiment::MsExperimentFiles} object.
@@ -35,6 +41,17 @@ names) that are part of a mass spectrometry experiment.
 The supported stash formats for \code{MsExperimentFiles} objects are listed in
 the sections below.
 }
+\section{Text-file format, \code{PlainTextParam}}{
+
+
+The text-file format stash folder for \code{MsExperimentFile} objects contains
+a file \emph{ms_experiment_files.txt} with two tabulator separated columns \emph{name}
+and \emph{files}. Each row (except the first) is one element of the
+\code{MsExperimentFile}, the first defining the object's names and the second
+its content, which represents a characted vector with the file name(s),
+separated by a \code{"|"} (if more than one).
+}
+
 \section{\emph{alabaster}-based format, \code{AlabasterParam}}{
 
 
