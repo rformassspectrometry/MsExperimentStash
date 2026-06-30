@@ -4,6 +4,32 @@ library(mzR)
 fls <- c(MsDataHub::X20171016_POOL_POS_1_105.134.mzML(),
          MsDataHub::X20171016_POOL_POS_3_105.134.mzML())
 
+test_that("readMsObject,saveMsObject,MsExperiment,PlainTextParam works", {
+    d <- file.path(tempdir(), "test_text")
+
+    a <- MsExperiment()
+    p <- PlainTextParam(d)
+    expect_no_error(saveMsObject(a, p))
+    expect_error(saveMsObject(a, p), "object stash")
+    expect_true("ms_experiment_sample_data.txt" %in% dir(d))
+    res <- readMsObject(MsExperiment(), p)
+    expect_s4_class(res, "MsExperiment")
+    unlink(d, recursive = TRUE)
+
+    a <- readMsExperiment(fls, data.frame(name = c("A", "B"), index = 1:2))
+    expect_no_error(saveMsObject(a, p, consolidate = TRUE))
+    res <- readMsObject(a, p)
+    expect_s4_class(res, "MsExperiment")
+    expect_equal(sampleData(a), sampleData(res))
+    expect_equal(a@sampleDataLinks, res@sampleDataLinks)
+    expect_equal(rtime(spectra(a)), rtime(spectra(res)))
+    expect_equal(normalizePath(d), dataStorageBasePath(spectra(res)))
+    unlink(d, recursive = TRUE)
+
+    expect_error(readMsObject(MsExperiment(), PlainTextParam(tempdir())),
+                 "not found")
+})
+
 test_that("MsExperiment alabaster stash works", {
     d <- file.path(tempdir(), "test_stash")
 
@@ -153,4 +179,26 @@ test_that("readMsObject,saveMsObject,MsExperiment,AlabasterParam works", {
                  normalizePath(file.path(d, "spectra", "backend")))
 
     unlink(d, recursive = TRUE)
+})
+
+test_that(".warnings_text_format works", {
+    a <- MsExperiment()
+    expect_no_warning(.warnings_text_format(a))
+
+    a@qdata <- SummarizedExperiment(matrix(rnorm(8), nrow = 2))
+    expect_warning(.warnings_text_format(a), "SummarizedExperiment")
+
+    a <- MsExperiment()
+    a@otherData[[1L]] <- 1:3
+    expect_warning(.warnings_text_format(a), "integer")
+
+    a <- MsExperiment()
+    a@metadata[[1L]] <- "a"
+    expect_warning(.warnings_text_format(a), "character")
+
+    a <- MsExperiment()
+    a@otherData[[1L]] <- 1:3
+    a@metadata[[1L]] <- "a"
+    a@qdata <- SummarizedExperiment(matrix(rnorm(8), nrow = 2))
+    .warnings_text_format(a)
 })

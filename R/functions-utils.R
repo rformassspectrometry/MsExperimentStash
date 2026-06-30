@@ -4,6 +4,7 @@
 #'
 #' Used in:
 #' - *R/MsExperimentFiles.R*: `validateAlabasterMsExperimentFiles()`
+#' - R/MsExperiment.R: validateAlabasterMsExperiment()
 #'
 #' @noRd
 .check_directory_content <- function(path, expected = character()) {
@@ -15,7 +16,8 @@
 #' Check if the file `x` already exists and throw an error if that's TRUE
 #'
 #' Used in:
-#' - *R/MsExperimentFiles.R*: `saveMsObject()`
+#' - *R/MsExperimentFiles.R*: `saveMsObject()` for `AlabasterParam` and
+#'   `PlainTextParam`.
 #'
 #' @noRd
 .check_overwriting <- function(x) {

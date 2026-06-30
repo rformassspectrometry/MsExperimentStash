@@ -41,6 +41,14 @@ names) that are part of a mass spectrometry experiment.
 The supported stash formats for \code{MsExperimentFiles} objects are listed in
 the sections below.
 }
+\section{\emph{alabaster}-based format, \code{AlabasterParam}}{
+
+
+The \code{MsExperimentFiles} stash folder contains the alabaster-specific
+\emph{OBJECT} file and a sub-folder \emph{x} with the \code{MsExperimentFiles}
+content serialized by \emph{alabaster.base}.
+}
+
 \section{Text-file format, \code{PlainTextParam}}{
 
 
@@ -50,14 +58,6 @@ and \emph{files}. Each row (except the first) is one element of the
 \code{MsExperimentFile}, the first defining the object's names and the second
 its content, which represents a characted vector with the file name(s),
 separated by a \code{"|"} (if more than one).
-}
-
-\section{\emph{alabaster}-based format, \code{AlabasterParam}}{
-
-
-The \code{MsExperimentFiles} stash folder contains the alabaster-specific
-\emph{OBJECT} file and a sub-folder \emph{x} with the \code{MsExperimentFiles}
-content serialized by \emph{alabaster.base}.
 }
 
 \examples{

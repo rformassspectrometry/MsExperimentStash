@@ -33,7 +33,8 @@ Imports:
     methods,
     alabaster.base,
     MsExperiment,
-    S4Vectors
+    S4Vectors,
+    Spectra
 Suggests:
     BiocStyle,
     testthat,
@@ -46,8 +47,7 @@ Suggests:
     SpectraStash,
     MsDataHub,
     QFeatures,
-    mzR,
-    Spectra
+    mzR
 Remotes:
     RforMassSpectrometry/MsStash,
     RforMassSpectrometry/SpectraStash

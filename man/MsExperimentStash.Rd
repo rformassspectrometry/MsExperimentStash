@@ -2,11 +2,17 @@
 % Please edit documentation in R/MsExperiment.R
 \name{MsExperimentStash}
 \alias{MsExperimentStash}
+\alias{saveMsObject,MsExperiment,PlainTextParam-method}
+\alias{readMsObject,MsExperiment,PlainTextParam-method}
 \alias{saveObject,MsExperiment-method}
 \alias{saveMsObject,MsExperiment,AlabasterParam-method}
 \alias{readMsObject,MsExperiment,AlabasterParam-method}
 \title{\code{MsExperiment} Stash}
 \usage{
+\S4method{saveMsObject}{MsExperiment,PlainTextParam}(object, param, ...)
+
+\S4method{readMsObject}{MsExperiment,PlainTextParam}(object, param, ...)
+
 \S4method{saveObject}{MsExperiment}(x, path, ...)
 
 \S4method{saveMsObject}{MsExperiment,AlabasterParam}(object, param, ...)
@@ -14,9 +20,10 @@
 \S4method{readMsObject}{MsExperiment,AlabasterParam}(object, param, ...)
 }
 \arguments{
-\item{x}{A \code{MsExperiment} object.}
+\item{object}{A \code{MsExperiment} object.}
 
-\item{path}{For \code{saveObject()}:}
+\item{param}{The parameter object to select and configure the stash format.
+Either \link[MsStash:AlabasterParam]{MsStash::AlabasterParam} or \link[MsStash:PlainTextParam]{MsStash::PlainTextParam}.}
 
 \item{...}{For \code{saveMsObject()}: optional arguments passed down to the
 \code{saveMsObject()} function to stash the \code{Spectra} object (if present),
@@ -24,10 +31,9 @@ such as \code{consolidate}. For \code{readMsObject()}: optional arguments for th
 \code{readMsObject()} call to restore the \code{Spectra} object (such as
 \code{spectraPath}). See \link[SpectraStash:SpectraStash]{SpectraStash::SpectraStash} for more information.}
 
-\item{object}{A \code{MsExperiment} object.}
+\item{x}{A \code{MsExperiment} object.}
 
-\item{param}{The parameter object to select and configure the stash format.
-Either \link[MsStash:AlabasterParam]{MsStash::AlabasterParam} or \link[MsStash:PlainTextParam]{MsStash::PlainTextParam}.}
+\item{path}{For \code{saveObject()}:}
 }
 \description{
 \code{MsExperiment} objects can be stored to (or read from) \emph{MsExperimentStash}es
@@ -44,7 +50,7 @@ currently not supported.
 
 The \emph{plain text file-based} stash is currently not supported.
 }
-\section{\emph{abalbaster}-based format, \code{AlabasterParam}}{
+\section{\emph{alabaster}-based format, \code{AlabasterParam}}{
 
 
 This stash format is the most complete and reliable way for long-term
@@ -75,6 +81,37 @@ Note that not all \code{MsBackend} types might be supported. In that case,
 the backend should be switched to one of the \code{MsBackend}s from the
 \emph{Spectra} package using the \code{\link[Spectra:setBackend]{Spectra::setBackend()}} function.
 }
+}
+
+\section{Text-file format, \code{PlainTextParam}}{
+
+
+\code{MsExperiment} objects can also be saved to plain text files as a
+MsExperimentStash in text file format. Note however that currently only some
+of the object's content can be saved in that format. Content of slots
+\verb{@qdata}, \verb{@metadata} and \verb{@otherData} (if present) are \strong{not} stored to the
+stash. The text file-based stash directory contains the following files:
+\itemize{
+\item \emph{ms_experiment_sample_data.txt}: tabulator delimited text file with the
+content of the \code{MsExperiment}'s \code{sampleData()}. This file is always saved.
+\item \emph{ms_experiment_sample_data_links_\if{html}{\out{<linked slot>}}.txt}: a two column
+tab-delimited text file with the mapping between rows in \code{sampleData()} and
+elements in other slots of the \code{MsExperiment}. The name of the respective
+slot is used as file name suffix. This file is only generated when \emph{sample
+data links} are present.
+\item \emph{ms_experiment_link_mcols.txt}: tab-delimited text file with the metadata
+content of the \verb{@sampleDataLink} slot. This file is only generated when
+\emph{sample data links} are present.
+\item \emph{ms_experiment_files.txt}: the object's \link[MsExperiment:MsExperimentFiles]{MsExperiment::MsExperimentFiles}.
+See \link{MsExperimentFilesStash} for information on the format. This file is
+only generated if \code{experimentFiles()} are present in the object.
+}
+
+If the \code{MsExperiment} contained a \link[Spectra:Spectra]{Spectra::Spectra} object, it is saved
+to the main \emph{MsExperimentStash} folder. A different set of files might be
+stored, depending on the \code{MsBackend} used. This can also include raw MS data
+files if parameter \code{consolidate = TRUE} is used in \code{saveMsObject()}.
+See \link[SpectraStash:SpectraStash]{SpectraStash::SpectraStash} for more information.
 }
 
 \examples{
@@ -111,4 +148,6 @@ spectra(res)
 }
 \author{
 Philippine Louail, Johannes Rainer
+
+Philippine Louail
 }

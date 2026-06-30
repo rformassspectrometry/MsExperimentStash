@@ -30,12 +30,12 @@ extends this framework and implements the functionality to stash (and restore)
 
 ## Supported Formats
 
-### ✅ Plain Text (`PlainTextParam`)
-- Tab-delimited export/import for key objects:
-
 ### ✅ Alabaster (`AlabasterParam`)
 - Structured archival using HDF5 and JSON (via
   [`alabaster.base`](https://doi.org/doi:10.18129/B9.bioc.alabaster.base))
+
+### ✅ Plain Text (`PlainTextParam`)
+- Tab-delimited export/import for key objects:
 
 ---
 
