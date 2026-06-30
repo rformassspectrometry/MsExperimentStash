@@ -25,3 +25,27 @@
              "the directory defined with parameter 'path' first.",
              call. = FALSE)
 }
+
+#' Used in:
+#' - R/MsExperiment.R: saveObject,MsExperiment
+#'
+#' @noRd
+.is_alabaster_matrix_installed <- function() {
+    requireNamespace("alabaster.matrix", quietly = TRUE)
+}
+
+#' Used in:
+#' - R/MsExperiment.R: saveObject,MsExperiment
+#'
+#' @noRd
+.is_spectra_stash_installed <- function() {
+    requireNamespace("SpectraStash", quietly = TRUE)
+}
+
+#' Used in
+#' - R/MsExperiment.R: saveObject,MsExperiment
+#'
+#' @noRd
+.is_alabaster_se_installed <- function() {
+    requireNamespace("alabaster.se", quietly = TRUE)
+}
