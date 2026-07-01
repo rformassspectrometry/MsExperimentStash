@@ -1,6 +1,7 @@
 library(SummarizedExperiment)
 library(Spectra)
 library(mzR)
+library(QFeatures) # for errors if a QFeatures is stored in the object
 fls <- c(MsDataHub::X20171016_POOL_POS_1_105.134.mzML(),
          MsDataHub::X20171016_POOL_POS_3_105.134.mzML())
 
@@ -110,7 +111,6 @@ test_that("MsExperiment alabaster stash works", {
     ############################################################################
     ## Errors
     ## save errors
-    library(QFeatures)
     a <- MsExperiment()
     qdata(a) <- QFeatures()
     expect_error(saveObject(a, d), "currently not supported")
