@@ -13,7 +13,7 @@ the sections below."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">MsExperimentStash</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.97.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.97.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -94,6 +94,15 @@ object should be stored into.</p></dd>
     <p><code>readMsObject()</code> returns a <a href="https://rdrr.io/pkg/MsExperiment/man/MsExperimentFiles.html" class="external-link">MsExperiment::MsExperimentFiles</a> object.</p>
     </div>
     <div class="section level2">
+    <h2 id="alabaster-based-format-alabasterparam"><em>alabaster</em>-based format, <code>AlabasterParam</code><a class="anchor" aria-label="anchor" href="#alabaster-based-format-alabasterparam"></a></h2>
+
+
+
+<p>The <code>MsExperimentFiles</code> stash folder contains the alabaster-specific
+<em>OBJECT</em> file and a sub-folder <em>x</em> with the <code>MsExperimentFiles</code>
+content serialized by <em>alabaster.base</em>.</p>
+    </div>
+    <div class="section level2">
     <h2 id="text-file-format-plaintextparam">Text-file format, <code>PlainTextParam</code><a class="anchor" aria-label="anchor" href="#text-file-format-plaintextparam"></a></h2>
 
 
@@ -104,15 +113,6 @@ and <em>files</em>. Each row (except the first) is one element of the
 <code>MsExperimentFile</code>, the first defining the object's names and the second
 its content, which represents a characted vector with the file name(s),
 separated by a <code>"|"</code> (if more than one).</p>
-    </div>
-    <div class="section level2">
-    <h2 id="alabaster-based-format-alabasterparam"><em>alabaster</em>-based format, <code>AlabasterParam</code><a class="anchor" aria-label="anchor" href="#alabaster-based-format-alabasterparam"></a></h2>
-
-
-
-<p>The <code>MsExperimentFiles</code> stash folder contains the alabaster-specific
-<em>OBJECT</em> file and a sub-folder <em>x</em> with the <code>MsExperimentFiles</code>
-content serialized by <em>alabaster.base</em>.</p>
     </div>
     <div class="section level2">
     <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>
@@ -142,7 +142,7 @@ content serialized by <em>alabaster.base</em>.</p>
 <span class="r-in"><span><span class="co">## saved through the *alabaster.base* package.</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://fs.r-lib.org" class="external-link">fs</a></span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://fs.r-lib.org/reference/dir_tree.html" class="external-link">dir_tree</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-weight: bold;">/tmp/RtmplvXLPk/ms_file_stash</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-weight: bold;">/tmp/RtmpWSXkiZ/ms_file_stash</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ├── OBJECT</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ├── _environment.json</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> └── <span style="color: #0000BB; font-weight: bold;">x</span></span>

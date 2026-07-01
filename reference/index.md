@@ -10,3 +10,12 @@
   :
 
   Stash for `MsExperimentFiles`
+
+- [`saveMsObject(`*`<MsExperiment>`*`,`*`<PlainTextParam>`*`)`](https://rformassspectrometry.github.io/MsExperimentStash/reference/MsExperimentStash.md)
+  [`readMsObject(`*`<MsExperiment>`*`,`*`<PlainTextParam>`*`)`](https://rformassspectrometry.github.io/MsExperimentStash/reference/MsExperimentStash.md)
+  [`saveObject(`*`<MsExperiment>`*`)`](https://rformassspectrometry.github.io/MsExperimentStash/reference/MsExperimentStash.md)
+  [`saveMsObject(`*`<MsExperiment>`*`,`*`<AlabasterParam>`*`)`](https://rformassspectrometry.github.io/MsExperimentStash/reference/MsExperimentStash.md)
+  [`readMsObject(`*`<MsExperiment>`*`,`*`<AlabasterParam>`*`)`](https://rformassspectrometry.github.io/MsExperimentStash/reference/MsExperimentStash.md)
+  :
+
+  `MsExperiment` Stash

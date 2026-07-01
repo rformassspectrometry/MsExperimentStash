@@ -60,6 +60,12 @@ readMsObject(object, param, ...)
 [MsExperiment::MsExperimentFiles](https://rdrr.io/pkg/MsExperiment/man/MsExperimentFiles.html)
 object.
 
+## *alabaster*-based format, `AlabasterParam`
+
+The `MsExperimentFiles` stash folder contains the alabaster-specific
+*OBJECT* file and a sub-folder *x* with the `MsExperimentFiles` content
+serialized by *alabaster.base*.
+
 ## Text-file format, `PlainTextParam`
 
 The text-file format stash folder for `MsExperimentFile` objects
@@ -68,12 +74,6 @@ columns *name* and *files*. Each row (except the first) is one element
 of the `MsExperimentFile`, the first defining the object's names and the
 second its content, which represents a characted vector with the file
 name(s), separated by a `"|"` (if more than one).
-
-## *alabaster*-based format, `AlabasterParam`
-
-The `MsExperimentFiles` stash folder contains the alabaster-specific
-*OBJECT* file and a sub-folder *x* with the `MsExperimentFiles` content
-serialized by *alabaster.base*.
 
 ## Author
 
@@ -103,7 +103,7 @@ saveMsObject(fls, AlabasterParam(d))
 ## saved through the *alabaster.base* package.
 library(fs)
 dir_tree(d)
-#> /tmp/RtmplvXLPk/ms_file_stash
+#> /tmp/RtmpWSXkiZ/ms_file_stash
 #> ├── OBJECT
 #> ├── _environment.json
 #> └── x

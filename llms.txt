@@ -33,14 +33,14 @@ package extends this framework and implements the functionality to stash
 
 ## Supported Formats
 
-### ✅ Plain Text (`PlainTextParam`)
-
-- Tab-delimited export/import for key objects:
-
 ### ✅ Alabaster (`AlabasterParam`)
 
 - Structured archival using HDF5 and JSON (via
   [`alabaster.base`](https://doi.org/doi:10.18129/B9.bioc.alabaster.base))
+
+### ✅ Plain Text (`PlainTextParam`)
+
+- Tab-delimited export/import for key objects:
 
 ------------------------------------------------------------------------
 
@@ -105,4 +105,13 @@ funding
   :
 
   Stash for `MsExperimentFiles`
+
+- [`saveMsObject(`*`<MsExperiment>`*`,`*`<PlainTextParam>`*`)`](https://rformassspectrometry.github.io/MsExperimentStash/reference/MsExperimentStash.md)
+  [`readMsObject(`*`<MsExperiment>`*`,`*`<PlainTextParam>`*`)`](https://rformassspectrometry.github.io/MsExperimentStash/reference/MsExperimentStash.md)
+  [`saveObject(`*`<MsExperiment>`*`)`](https://rformassspectrometry.github.io/MsExperimentStash/reference/MsExperimentStash.md)
+  [`saveMsObject(`*`<MsExperiment>`*`,`*`<AlabasterParam>`*`)`](https://rformassspectrometry.github.io/MsExperimentStash/reference/MsExperimentStash.md)
+  [`readMsObject(`*`<MsExperiment>`*`,`*`<AlabasterParam>`*`)`](https://rformassspectrometry.github.io/MsExperimentStash/reference/MsExperimentStash.md)
+  :
+
+  `MsExperiment` Stash
 
