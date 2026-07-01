@@ -51,3 +51,11 @@
 .is_alabaster_se_installed <- function() {
     requireNamespace("alabaster.se", quietly = TRUE)
 }
+
+#' Used in
+#' - *R/MsExperiment.R*: `readMsObject,MsExperiment,MetaboLightsParam`
+#'
+#' @noRd
+.is_ms_backend_metabo_lights_installed <- function() {
+    requireNamespace("MsBackendMetaboLights", quietly = TRUE)
+}
