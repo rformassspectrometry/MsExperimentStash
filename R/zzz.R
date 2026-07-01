@@ -7,4 +7,10 @@
                                    validateAlabasterMsExperimentFiles)
     registerReadObjectFunction("ms_experiment_files",
                                readAlabasterMsExperimentFiles)
+    ## MsExperiment
+    registerValidateObjectFunction("ms_experiment",
+                                   validateAlabasterMsExperiment)
+    registerReadObjectFunction("ms_experiment",
+                               readAlabasterMsExperiment)
+
 }

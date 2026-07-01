@@ -10,6 +10,12 @@
 #' The supported stash formats for `MsExperimentFiles` objects are listed in
 #' the sections below.
 #'
+#' @section *alabaster*-based format, `AlabasterParam`:
+#'
+#' The `MsExperimentFiles` stash folder contains the alabaster-specific
+#' *OBJECT* file and a sub-folder *x* with the `MsExperimentFiles`
+#' content serialized by *alabaster.base*.
+#'
 #' @section Text-file format, `PlainTextParam`:
 #'
 #' The text-file format stash folder for `MsExperimentFile` objects contains
@@ -18,12 +24,6 @@
 #' `MsExperimentFile`, the first defining the object's names and the second
 #' its content, which represents a characted vector with the file name(s),
 #' separated by a `"|"` (if more than one).
-#'
-#' @section *alabaster*-based format, `AlabasterParam`:
-#'
-#' The `MsExperimentFiles` stash folder contains the alabaster-specific
-#' *OBJECT* file and a sub-folder *x* with the `MsExperimentFiles`
-#' content serialized by *alabaster.base*.
 #'
 #' @param object An `MsExperimentFiles` object.
 #'
