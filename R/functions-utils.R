@@ -4,7 +4,7 @@
 #'
 #' Used in:
 #' - *R/MsExperimentFiles.R*: `validateAlabasterMsExperimentFiles()`
-#' - R/MsExperiment.R: validateAlabasterMsExperiment()
+#' - *R/MsExperiment.R*: `validateAlabasterMsExperiment()`
 #'
 #' @noRd
 .check_directory_content <- function(path, expected = character()) {
@@ -29,7 +29,7 @@
 }
 
 #' Used in:
-#' - R/MsExperiment.R: saveObject,MsExperiment
+#' - *R/MsExperiment.R*: `saveObject,MsExperiment`
 #'
 #' @noRd
 .is_alabaster_matrix_installed <- function() {
@@ -37,7 +37,7 @@
 }
 
 #' Used in:
-#' - R/MsExperiment.R: saveObject,MsExperiment
+#' - *R/MsExperiment.R*: `saveObject,MsExperiment`
 #'
 #' @noRd
 .is_spectra_stash_installed <- function() {
@@ -45,7 +45,7 @@
 }
 
 #' Used in
-#' - R/MsExperiment.R: saveObject,MsExperiment
+#' - *R/MsExperiment.R*: `saveObject,MsExperiment`
 #'
 #' @noRd
 .is_alabaster_se_installed <- function() {
