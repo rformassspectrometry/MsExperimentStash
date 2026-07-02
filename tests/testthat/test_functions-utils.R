@@ -21,3 +21,7 @@ test_that(".is_spectra_stash_installed works", {
 test_that(".is_alabaster_se_installed works", {
     expect_true(.is_alabaster_se_installed())
 })
+
+test_that(".is_ms_backend_metabo_lights_installed works", {
+    expect_true(.is_ms_backend_metabo_lights_installed())
+})

@@ -1,6 +1,6 @@
 Package: MsExperimentStash
 Title: Serialize and restore MsExperiment objects in interoperable file formats
-Version: 0.97.2
+Version: 0.97.3
 Authors@R:
     c(person(given = "Johannes", family = "Rainer",
              email = "Johannes.Rainer@eurac.edu",
@@ -34,7 +34,9 @@ Imports:
     alabaster.base,
     MsExperiment,
     S4Vectors,
-    Spectra
+    Spectra,
+    MsCoreUtils,
+    ProtGenerics
 Suggests:
     BiocStyle,
     testthat,
@@ -47,12 +49,15 @@ Suggests:
     SpectraStash,
     MsDataHub,
     QFeatures,
-    mzR
+    mzR,
+    knitr,
+    MsBackendMetaboLights
 Remotes:
     RforMassSpectrometry/MsStash,
     RforMassSpectrometry/SpectraStash
 License: GPL-3
 Encoding: UTF-8
+VignetteBuilder: knitr
 BugReports: https://github.com/RforMassSpectrometry/MsExperimentStash/issues
 URL: https://github.com/RforMassSpectrometry/MsExperimentStash
 biocViews: Infrastructure, MassSpectrometry, Metabolomics, DataImport, Proteomics

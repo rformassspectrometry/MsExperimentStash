@@ -114,6 +114,15 @@ files if parameter \code{consolidate = TRUE} is used in \code{saveMsObject()}.
 See \link[SpectraStash:SpectraStash]{SpectraStash::SpectraStash} for more information.
 }
 
+\section{Retrieve MS data from \emph{MetaboLights}}{
+
+
+In addition to the MsExperimentStash formats for storage of \code{MsExperiment}
+objects, it is possible to load data from a metabolomics study directly
+from the \href{https://www.ebi.ac.uk/metabolights/}{MetaboLights} repository.
+See \link{MetaboLightsParam} for more information.
+}
+
 \examples{
 
 ## Example MS data files
@@ -145,6 +154,10 @@ res
 sampleData(res)
 
 spectra(res)
+}
+\seealso{
+\link{MetaboLightsParam} for loading an \code{MsExperiment} from the
+MetaboLights public repository.
 }
 \author{
 Philippine Louail, Johannes Rainer

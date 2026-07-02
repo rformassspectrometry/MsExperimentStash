@@ -68,6 +68,13 @@
 #' files if parameter `consolidate = TRUE` is used in `saveMsObject()`.
 #' See [SpectraStash::SpectraStash] for more information.
 #'
+#' @section Retrieve MS data from *MetaboLights*:
+#'
+#' In addition to the MsExperimentStash formats for storage of `MsExperiment`
+#' objects, it is possible to load data from a metabolomics study directly
+#' from the [MetaboLights](https://www.ebi.ac.uk/metabolights/) repository.
+#' See [MetaboLightsParam] for more information.
+#'
 #' @note
 #'
 #' Overwriting an existing *MsExperimentStash* is not allowed.
@@ -93,6 +100,9 @@
 #'     `spectraPath`). See [SpectraStash::SpectraStash] for more information.
 #'
 #' @author Philippine Louail, Johannes Rainer
+#'
+#' @seealso [MetaboLightsParam] for loading an `MsExperiment` from the
+#'     MetaboLights public repository.
 #'
 #' @examples
 #'
@@ -354,6 +364,96 @@ setMethod("readMsObject", signature(object = "MsExperiment",
           })
 
 ################################################################################
+##    MetaboLightsParamParam
+################################################################################
+#' @rdname MetaboLightsParam
+#'
+#' @importFrom utils menu
+#'
+#' @importFrom MsCoreUtils retry
+#'
+#' @importFrom MsExperiment linkSampleData
+#'
+#' @author Philippine Louail
+setMethod("readMsObject",
+          signature(object = "MsExperiment", param = "MetaboLightsParam"),
+          function(object, param, keepOntology = TRUE, keepProtocol = TRUE,
+                   simplify = TRUE, ...) {
+              ## Instead of importing from MsBackendMetaboLights we are
+              ## only loading here its namespace when this function is called;
+              ## for general stash functionality MsBackendMetaboLights is not
+              ## required and we aim to keep the dependencies low.
+              if (!.is_ms_backend_metabo_lights_installed())
+                  stop("Required package 'MsBackendMetaboLights' is missing. ",
+                       "Please install it and try again.", call. = FALSE)
+              pth <- MsBackendMetaboLights::mtbls_ftp_path(param@mtblsId)
+              all_fls <- MsBackendMetaboLights::mtbls_list_files(param@mtblsId)
+              ## Extract and read assay files
+              assays <- all_fls[grepl("^a_", all_fls)]
+              if (length(param@assayName) > 0) {
+                  selected_assay <- param@assayName
+                  if (!selected_assay %in% assays)
+                      stop("Specified assay \"", selected_assay, "\" does ",
+                           "not exist.", call. = FALSE)
+              } else {
+                  if (length(assays) == 1) {
+                      selected_assay <- assays
+                      message("Only one assay file found: ", selected_assay)
+                  } else {
+                      message("Multiple assay files found:\n")
+                      selection <- menu(assays,
+                                        title = paste("Please choose the assay",
+                                                      "file you want to use:"))
+                      selected_assay <- assays[selection]
+                  }
+              }
+              assay_data <- retry(
+                  read.table(paste0(pth, selected_assay), header = TRUE,
+                             sep = "\t", check.names = FALSE, comment.char = "",
+                             quote = ""),
+                  ntimes = 5, sleep_mult = 7, retry_on = .RETRY_PATTERN)
+              ## Extract and read sample info files
+              s_files <- all_fls[grepl("^s_", all_fls)]
+              sample_info <- retry(
+                  read.table(paste0(pth, s_files), header = TRUE, sep = "\t",
+                             check.names = FALSE, comment.char = "",quote = ""),
+                  ntimes = 5, sleep_mult = 7, retry_on = .RETRY_PATTERN)
+              ## merging
+              ord <- match(assay_data$`Sample Name`, sample_info$`Sample Name`)
+              merged_data <- cbind(assay_data, sample_info[ord, ])
+              if (keepProtocol || keepOntology || simplify)
+                  merged_data <- .clean_merged(x = merged_data,
+                                               keepProtocol = keepProtocol,
+                                               keepOntology = keepOntology,
+                                               simplify = simplify)
+              ## Assemble object
+              b <- MsBackendMetaboLights::MsBackendMetaboLights()
+              object@spectra <- Spectra(mtblsId = param@mtblsId, source = b,
+                                        assayName = selected_assay,
+                                        filePattern = param@filePattern)
+              ## sample to spectra link
+              fl <- spectra(object)$derived_spectral_data_file[1L]
+              ## identify the column in the assay/sample description containing
+              ## the file name information.
+              nms <- c("Raw Spectral Data File", "Derived Spectral Data File")
+              nms <- nms[nms %in% colnames(merged_data)]
+              nme <- nms[vapply(nms, function(z)
+                  any(merged_data[, z] %in% fl), NA)]
+              merged_data <- merged_data[grepl(param@filePattern,
+                                               merged_data[, nme]), ,
+                                         drop = FALSE]
+              nnme <- gsub(" ", "_", nme, fixed = TRUE)
+              colnames(merged_data)[colnames(merged_data) == nme] <- nnme
+              object@sampleData <- DataFrame(merged_data, check.names = FALSE,
+                                             row.names = NULL)
+              w <- paste0("sampleData.", nnme,
+                          "= spectra.derived_spectral_data_file")
+              object <- linkSampleData(object, with = w)
+              validObject(object)
+              object
+          })
+
+################################################################################
 ##    utility functions
 ################################################################################
 
@@ -393,3 +493,5 @@ setMethod("readMsObject", signature(object = "MsExperiment",
     if (length(msg))
         warning(msg, call. = FALSE, immediate. = TRUE)
 }
+
+.RETRY_PATTERN <- "temp|connect"

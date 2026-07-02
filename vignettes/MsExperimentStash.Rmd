@@ -1,0 +1,293 @@
+---
+title: "Safely Store `MsExperiment` Objects in a Portable Stash"
+output:
+    BiocStyle::html_document:
+        toc_float: true
+vignette: >
+    %\VignetteIndexEntry{Safely Store MsExperiment Object in a Portable Stash}
+    %\VignetteEngine{knitr::rmarkdown}
+    %\VignetteEncoding{UTF-8}
+    %\VignettePackage{SpectraStash}
+    %\VignetteDepends{MsExperiment,Spectra,SpectraStash,BiocStyle,alabaster.base,fs,SummarizedExperiment}
+---
+
+```{r, echo = FALSE, message = FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE)
+library(BiocStyle)
+```
+
+# Introduction
+
+Data objects in R can be serialized to disk in R's *rds* or *RData* format using
+the base R `save()` function and re-imported using the `load()` function. This
+R-specific binary data format can however not be used easily in other
+programming languages preventing the exchange of R data objects between
+software. The *MsStash* package defines basic classes and generic methods to
+export and import mass spectrometry (MS) data objects in various storage formats
+aiming to facilitate data exchange between software. The *MsExperimentStash*
+package implements portable data storage formats (stashes) for data classes from
+the `r Biocpkg("MsExperiment")` package, including the `MsExperiment`
+object. Supported stash formats are, next to storage in simple plain text files,
+also Bioconductor's *alabaster* format defined in the
+`r Biocpkg("alabaster.base")` and related packages.
+
+# Installation
+
+The package can be installed with the *BiocManager* package. To install
+*BiocManager* use `install.packages("BiocManager")` and, after that,
+`BiocManager::install("RforMassSpectrometry/MsExperimentStash")` to install this
+package.
+
+# A stash for `MsExperiment` objects
+
+MS data objects can be saved and restored through the `saveMsObject()` and
+`readMsObject()` functions into (or from) MS data stashes. Supported stash
+formats and their respective parameter objects are:
+
+- `AlabasterParam`: storage of MS data using Bioconductor's
+  `r Biocpkg("alabaster.base")` framework using files in HDF5 and JSON format.
+  MS stashes in this format fully support the functions `saveObject()` and
+  `readObject()` from *alabaster.base*.
+- `PlainTextParam`: storage of data in (a custom) plain text file format. Note
+  that this format currently does not support all data structures potentially
+  present in an `MsExperiment` and hence the alabaster format is preferred.
+
+See also the vignette from the `r Biocpkg("MsStash")` for details on the formats
+and implementation notes.
+
+As an example we create below a `MsExperiment` object with MS data two example
+MS data files from the *MsDataHub* package.
+
+```{r, message = FALSE}
+library(MsExperiment)
+library(MsExperimentStash)
+library(MsDataHub)
+fls <- c(X20171016_POOL_POS_1_105.134.mzML(),
+         X20171016_POOL_POS_3_105.134.mzML())
+
+#' Define a data.frame providing information on samples
+d <- data.frame(name = c("QC 1", "QC 2"),
+                sample_type = c("QC POOL", "QC POOL"),
+                injection_index = c(1, 8))
+
+#' Read the data as an MsExperiment object
+mse <- readMsExperiment(fls, sampleData = d)
+mse
+```
+
+We next create a `SummarizedExperiment` and add that to the `MsExperiment`
+object. In a real-world use case this would contain quantitative feature
+abundances after e.g. preprocessing the data with *xcms*. For our example we
+fill the `SummarizedExperiment` with arbitrary information and random abundance
+values.
+
+```{r}
+#' Define a SummarizedExperiment with quantification data
+library(SummarizedExperiment)
+se <- SummarizedExperiment(
+    list(raw = matrix(rnorm(8), ncol = 2)),
+    rowData = data.frame(feature_id = c("F01", "F02", "F03", "F04"),
+                         mzmed = c(127.2, 232.1, 321.2, 134.5),
+                         rtmed = c(38.5, 127.3, 219.8, 64.3)),
+    colData = d)
+rownames(se) <- c("F01", "F02", "F03", "F04")
+colnames(se) <- c("QC_1", "QC_2")
+
+#' Add the SummarizedExperiment to the MsExperiment
+qdata(mse) <- se
+mse
+```
+
+We next store this `MsExperiment` object to a *MsExperimentStash* using the
+`saveMsObject()` function. We use an alabaster format and define the location of
+the stash with the `path` parameter of `AlabasterParam`. For the present example
+we save it to a temporary folder.
+
+```{r}
+#' Define the location of the stash
+d <- file.path(tempfile(), "mse_stash")
+
+#' Configure the format and location
+ap <- AlabasterParam(d)
+
+#' Save the `MsExperiment` object to the stash
+saveMsObject(mse, ap)
+```
+
+The content of the stash folder is:
+
+```{r}
+library(fs)
+dir_tree(d)
+```
+
+In alabaster format, each slot of the `MsExperiment` object is stored into its
+own sub directory. The `Spectra` object representing the experiment's MS data is
+stored for example (as a *SpectraStash*) into a sub-folder *spectra*. In
+general, users will not interact directly with the files in this stash, but will
+restore the stashed `MsExperiment` from such a *MsExperimentStash* using the
+`readMsObject()` function:
+
+```{r}
+res <- readMsObject(MsExperiment(), ap)
+res
+```
+
+For `readMsObject()` we need to specify the type of the object to restore from
+the stash with the first parameter of the function - in our case
+`MsExperiment()`. *MsExperimentStash* adds full support for *alabaster*-based
+serialization formats to `MsExperiment` objects and we can therefore also use
+the `readObject()` from the `r Biocpkg("alabaster.base")` package to restore the
+object.
+
+```{r}
+library(alabaster.base)
+res <- readObject(d)
+res
+
+```
+
+Due to the modular structure of the *MsExperimentStash* is we can load also only
+a single component of the `MsExperiment`. We can for example restore the
+`Spectra` object from the *spectra* sub-folder:
+
+```{r}
+library(Spectra)
+sps <- readMsObject(Spectra(), AlabasterParam(file.path(d, "spectra")))
+sps
+```
+
+Or only the `SummarizedExperiment` from the *qdata* sub-folder (using
+*alabaster.base* functions):
+
+```{r}
+readObject(file.path(d, "qdata"))
+```
+
+
+## Creating self-contained stashes
+
+The MS data from our example `MsExperiment` is represented by a `Spectra`
+object using an `MsBackendMzR` backend.
+
+```{r}
+spectra(mse)
+```
+
+This type of backend keeps only the spectra metadata in memory while the mass
+peaks data (*m/z* and intensity values) are retrieved on demand from the
+original MS data files. By default, when saved to a stash, only the metadata and
+the **reference** to the original MS data tiles are serialized to disk. If the
+MS data files are moved to another folder, or if the MsExperimentStash is moved
+to another computer, the data can not be fully restored (unless the path to the
+new location of the MS data files is provided with parameter `spectraPath` in
+`readMsObject()`). The stash functionality for most `Spectra` backend
+implementation supports however a parameter `consolidate` which, if set to
+`TRUE` will copy **all** required data **into** the stash generating hence a
+self-contained and portable MsExperimentStash:
+
+```{r}
+#' Save the `MsExperiment` to a stash which includes the full data
+d <- file.path(tempdir(), "portable_stash")
+
+saveMsObject(mse, AlabasterParam(d), consolidate = TRUE)
+```
+
+The SpectraStash within the MsExperimentStash contains now also the original MS
+data files (which have in this case random names without the expected *mzML*
+file ending, because the data was provided through the *MsDataHub* package):
+
+```{r}
+dir_tree(file.path(d, "spectra", "backend"))
+```
+
+While being self-contained, the size of such a stash might become very large,
+depending on the number and the size of the original MS data files.
+
+Alternatively, we could also change the backend of the `Spectra` within the
+`MsExperiment` to an *in-memory* backend and create a stash from that object.
+
+```{r, warning = FALSE}
+#' Change the Spectra backend to MsBackendMemory: load all MS data
+#' into memory
+spectra(mse) <- setBackend(spectra(mse), MsBackendMemory())
+
+#' Save the MsExperiment to a stash
+d <- file.path(tempdir(), "memory_stash")
+saveMsObject(mse, AlabasterParam(d))
+```
+
+The full MS data is now stored in a *peaks.h5* file (in HDF5 file format) within
+the stash.
+
+```{r}
+dir_tree(file.path(d, "spectra", "backend"))
+```
+
+# Retrieve MS experiments from MetaboLights
+
+The *MetaboLights* database is one of the main repositories to deposit
+metabolomics data sets and experiments. With `readMsObject()` and a
+`MetaboLightsParam` it is possible to retrieve and load the data set from a
+MetaboLights study directly as an `MsExperiment` object. Sample and
+protocol/metadata information is loaded into the object's `sampleData()` while
+the MS data files are downloaded and locally cached through the
+`r Biocpkg("MsBackendMetaboLights")` package. This data is available through the
+object's `spectra()` data.
+
+Below, we demonstrate how to load the dataset with the ID: *MTBLS575*.
+We also use the `assayName` parameter to specify which assay we want to load,
+and the `filePattern` parameter to indicate which assay files to load. Defining
+the assay name is required for studies that have more than one *assay* (e.g.,
+data measured in positive and polarity modes or using different chromatographic
+setups). The `filePattern` on the other hand allows to restrict downloading to
+specific files; for our example we only load data files with a file ending
+*cdf*. It is recommended to adjust these settings according to your specific
+study.
+
+```{r}
+library(MsExperiment)
+#' Prepare parameter
+param <- MetaboLightsParam(
+    mtblsId = "MTBLS575",
+    assayName = paste0("a_MTBLS575_POS_INFEST_CTRL_mass_spectrometry.txt"),
+    filePattern = "cdf$")
+
+#' Load MsExperiment object
+mse <- readMsObject(MsExperiment(), param)
+```
+
+Next, we examine the `sampleData()` of our `mse` object:
+
+```{r}
+sampleData(mse)
+```
+
+We observe that a large number of columns are present. Several parameters are
+available in the `readMsObject()` function to simplify and restrict the content
+loaded into the `sampleData`. Setting `keepOntology = FALSE` will for example
+remove columns related to ontology terms, while `keepProtocol = FALSE` will
+remove columns related to protocol information.  The `simplify = TRUE` option
+(the default) removes `NA`s and merges columns with different names but
+duplicate contents. You can set `simplify = FALSE` to retain all columns. Below,
+we load the object again, this time simplifying the `sampleData`:
+
+```{r}
+mse <- readMsObject(MsExperiment(), param, keepOntology = FALSE,
+                    keepProtocol = FALSE, simplify = TRUE)
+```
+
+Note that the MS data files were loaded from the local cache and not downloaded
+again. Now, if we examine the `sampleData` information:
+
+```{r}
+sampleData(mse)
+```
+
+We can see that it is much simpler.
+
+# Session information
+
+```{r}
+sessionInfo()
+```

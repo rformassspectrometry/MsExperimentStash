@@ -24,7 +24,8 @@ test_that("readMsObject,saveMsObject,MsExperiment,PlainTextParam works", {
     expect_equal(sampleData(a), sampleData(res))
     expect_equal(a@sampleDataLinks, res@sampleDataLinks)
     expect_equal(rtime(spectra(a)), rtime(spectra(res)))
-    expect_equal(normalizePath(d), dataStorageBasePath(spectra(res)))
+    expect_equal(
+        normalizePath(d), normalizePath(dataStorageBasePath(spectra(res))))
     unlink(d, recursive = TRUE)
 
     expect_error(readMsObject(MsExperiment(), PlainTextParam(tempdir())),
@@ -78,7 +79,7 @@ test_that("MsExperiment alabaster stash works", {
     expect_no_error(saveObject(a, d, consolidate = TRUE))
     res <- readObject(d)
     expect_equal(normalizePath(file.path(d, "spectra", "backend")),
-                 dataStorageBasePath(spectra(res)))
+                 normalizePath(dataStorageBasePath(spectra(res))))
     unlink(d, recursive = TRUE)
 
     ## Spectra and SummarizedExperiment
@@ -201,4 +202,35 @@ test_that(".warnings_text_format works", {
     a@metadata[[1L]] <- "a"
     a@qdata <- SummarizedExperiment(matrix(rnorm(8), nrow = 2))
     .warnings_text_format(a)
+})
+
+test_that("readMsObject,MsExperiment,MetaboLightsParam works", {
+    param <- MetaboLightsParam(mtblsId = "MTBLS39")
+    res <- readMsObject(MsExperiment(), param)
+    expect_is(res, "MsExperiment")
+    expect_is(res@sampleData, "DataFrame")
+
+    ## Test keepOntology and keepProtocol
+    res_filtered <- readMsObject(MsExperiment(), param,
+                                 keepOntology = FALSE,
+                                 keepProtocol = FALSE)
+    expect_lt(ncol(res_filtered@sampleData), ncol(res@sampleData))
+
+    ## Test simplify flag removes columns with NAs and duplicated columns
+    expect_true(all(colSums(is.na(res@sampleData)) != nrow(res@sampleData)))
+    expect_true(any(duplicated(as.list(res@sampleData))) == FALSE)
+})
+
+test_that("MetaboLightsParam interactive session works", {
+    ## Testing interactive sesh
+    mock_param <- MetaboLightsParam(mtblsId = "MTBLS575")
+    menu <- NULL
+    with_mocked_bindings(
+        menu = function(choices, title = NULL) { 3 },
+        {
+            result <- readMsObject(MsExperiment(), mock_param)
+        }
+    )
+    expect_true(nrow(result@sampleData) == 6)
+    expect_true(ncol(result@sampleData) == 30)
 })

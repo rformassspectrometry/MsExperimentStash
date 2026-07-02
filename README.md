@@ -2,8 +2,10 @@
 
 *A safe way to store your `MsExperiment` objects in interoperable formats.*
 
-[![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
+[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![Test-R-universe](https://github.com/RforMassSpectrometry/SpectraStash/workflows/Test-R-universe/badge.svg)](https://github.com/RforMassSpectrometry/SpectraStash/actions?query=workflow%3ATest-R-universe)
 [![codecov](https://codecov.io/gh/rformassspectrometry/MsExperimentStash/graph/badge.svg?token=bSIyfw4y5K)](https://codecov.io/gh/rformassspectrometry/MsExperimentStash)
+[![:name status badge](https://rformassspectrometry.r-universe.dev/badges/:name)](https://rformassspectrometry.r-universe.dev/)
 [![license](https://img.shields.io/badge/license-GPL--3.0-brightgreen.svg)](https://opensource.org/license/gpl-3.0)
 
 ---
@@ -35,7 +37,11 @@ extends this framework and implements the functionality to stash (and restore)
   [`alabaster.base`](https://doi.org/doi:10.18129/B9.bioc.alabaster.base))
 
 ### ✅ Plain Text (`PlainTextParam`)
-- Tab-delimited export/import for key objects:
+- Tab-delimited export/import for key objects.
+
+### ⤵️ Retrieve data directly from MetaboLights (`MetaboLightsParam`)
+- Load data from a metabolomics study from the
+  [MetaboLights](https://www.ebi.ac.uk/metabolights/) repository
 
 ---
 
