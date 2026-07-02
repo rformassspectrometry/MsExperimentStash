@@ -24,7 +24,8 @@ test_that("readMsObject,saveMsObject,MsExperiment,PlainTextParam works", {
     expect_equal(sampleData(a), sampleData(res))
     expect_equal(a@sampleDataLinks, res@sampleDataLinks)
     expect_equal(rtime(spectra(a)), rtime(spectra(res)))
-    expect_equal(normalizePath(d), dataStorageBasePath(spectra(res)))
+    expect_equal(
+        normalizePath(d), normalizePath(dataStorageBasePath(spectra(res))))
     unlink(d, recursive = TRUE)
 
     expect_error(readMsObject(MsExperiment(), PlainTextParam(tempdir())),
@@ -78,7 +79,7 @@ test_that("MsExperiment alabaster stash works", {
     expect_no_error(saveObject(a, d, consolidate = TRUE))
     res <- readObject(d)
     expect_equal(normalizePath(file.path(d, "spectra", "backend")),
-                 dataStorageBasePath(spectra(res)))
+                 normalizePath(dataStorageBasePath(spectra(res))))
     unlink(d, recursive = TRUE)
 
     ## Spectra and SummarizedExperiment

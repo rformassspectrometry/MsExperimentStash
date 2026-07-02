@@ -1,10 +1,10 @@
 ---
-title: "Savely Store `MsExperiment` Objects in a Portable Stash"
+title: "Safely Store `MsExperiment` Objects in a Portable Stash"
 output:
     BiocStyle::html_document:
         toc_float: true
 vignette: >
-    %\VignetteIndexEntry{Savely Store MsExperiment Object in a Portable Stash}
+    %\VignetteIndexEntry{Safely Store MsExperiment Object in a Portable Stash}
     %\VignetteEngine{knitr::rmarkdown}
     %\VignetteEncoding{UTF-8}
     %\VignettePackage{SpectraStash}
@@ -28,8 +28,8 @@ aiming to facilitate data exchange between software. The *MsExperimentStash*
 package implements portable data storage formats (stashes) for data classes from
 the `r Biocpkg("MsExperiment")` package, including the `MsExperiment`
 object. Supported stash formats are, next to storage in simple plain text files,
-also Bioconductor's *alabaster* format defined in the `r
-Biocpkg("alabaster.base")` and related packages.
+also Bioconductor's *alabaster* format defined in the
+`r Biocpkg("alabaster.base")` and related packages.
 
 # Installation
 
@@ -44,9 +44,9 @@ MS data objects can be saved and restored through the `saveMsObject()` and
 `readMsObject()` functions into (or from) MS data stashes. Supported stash
 formats and their respective parameter objects are:
 
-- `AlabasterParam`: storage of MS data using Bioconductor's `r
-  Biocpkg("alabaster.base")` framework using files in HDF5 and JSON format. MS
-  stashes in this format fully support the functions `saveObject()` and
+- `AlabasterParam`: storage of MS data using Bioconductor's
+  `r Biocpkg("alabaster.base")` framework using files in HDF5 and JSON format.
+  MS stashes in this format fully support the functions `saveObject()` and
   `readObject()` from *alabaster.base*.
 - `PlainTextParam`: storage of data in (a custom) plain text file format. Note
   that this format currently does not support all data structures potentially
@@ -231,8 +231,8 @@ metabolomics data sets and experiments. With `readMsObject()` and a
 `MetaboLightsParam` it is possible to retrieve and load the data set from a
 MetaboLights study directly as an `MsExperiment` object. Sample and
 protocol/metadata information is loaded into the object's `sampleData()` while
-the MS data files are downloaded and locally cached through the `r
-Biocpkg("MsBackendMetaboLights")` package. This data is available through the
+the MS data files are downloaded and locally cached through the
+`r Biocpkg("MsBackendMetaboLights")` package. This data is available through the
 object's `spectra()` data.
 
 Below, we demonstrate how to load the dataset with the ID: *MTBLS575*.
@@ -246,7 +246,7 @@ specific files; for our example we only load data files with a file ending
 study.
 
 ```{r}
-library(MsExperiment())
+library(MsExperiment)
 #' Prepare parameter
 param <- MetaboLightsParam(
     mtblsId = "MTBLS575",
