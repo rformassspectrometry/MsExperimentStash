@@ -24,12 +24,12 @@ Source:
 
 Rainer J, Louail P (2026). *MsExperimentStash: Serialize and restore
 MsExperiment objects in interoperable file formats*. R package version
-0.97.2, <https://github.com/RforMassSpectrometry/MsExperimentStash>.
+0.97.3, <https://github.com/RforMassSpectrometry/MsExperimentStash>.
 
     @Manual{,
       title = {MsExperimentStash: Serialize and restore MsExperiment objects in interoperable file formats},
       author = {Johannes Rainer and Philippine Louail},
       year = {2026},
-      note = {R package version 0.97.2},
+      note = {R package version 0.97.3},
       url = {https://github.com/RforMassSpectrometry/MsExperimentStash},
     }

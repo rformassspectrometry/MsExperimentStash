@@ -84,12 +84,6 @@ Johannes Rainer
 ``` r
 
 library(MsExperiment)
-#> Loading required package: ProtGenerics
-#> 
-#> Attaching package: ‘ProtGenerics’
-#> The following object is masked from ‘package:stats’:
-#> 
-#>     smooth
 
 fls <- MsExperimentFiles(list(input = c("file.mzML", "file2.mgf")))
 
@@ -103,7 +97,7 @@ saveMsObject(fls, AlabasterParam(d))
 ## saved through the *alabaster.base* package.
 library(fs)
 dir_tree(d)
-#> /tmp/RtmpWSXkiZ/ms_file_stash
+#> /tmp/RtmpB00ZqG/ms_file_stash
 #> ├── OBJECT
 #> ├── _environment.json
 #> └── x

@@ -2,6 +2,11 @@
 
 ## *MsExperimentStash* 0.97
 
+### Changes in version 0.97.3
+
+- Add `MetaboLightsParam` to support importing an experiment from
+  MetaboLights.
+
 ### Changes in version 0.97.2
 
 - Add *alabaster*-format stash for `MsExperiment`.

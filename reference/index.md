@@ -2,6 +2,10 @@
 
 ## All functions
 
+- [`MetaboLightsParam()`](https://rformassspectrometry.github.io/MsExperimentStash/reference/MetaboLightsParam.md)
+  [`readMsObject(`*`<MsExperiment>`*`,`*`<MetaboLightsParam>`*`)`](https://rformassspectrometry.github.io/MsExperimentStash/reference/MetaboLightsParam.md)
+  : Load Content from a MetaboLights Study
+
 - [`saveMsObject(`*`<MsExperimentFiles>`*`,`*`<PlainTextParam>`*`)`](https://rformassspectrometry.github.io/MsExperimentStash/reference/MsExperimentFilesStash.md)
   [`readMsObject(`*`<MsExperimentFiles>`*`,`*`<PlainTextParam>`*`)`](https://rformassspectrometry.github.io/MsExperimentStash/reference/MsExperimentFilesStash.md)
   [`saveObject(`*`<MsExperimentFiles>`*`)`](https://rformassspectrometry.github.io/MsExperimentStash/reference/MsExperimentFilesStash.md)

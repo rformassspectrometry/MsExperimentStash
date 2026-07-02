@@ -156,6 +156,20 @@ include raw MS data files if parameter `consolidate = TRUE` is used in
 [SpectraStash::SpectraStash](https://rdrr.io/pkg/SpectraStash/man/SpectraStash.html)
 for more information.
 
+## Retrieve MS data from *MetaboLights*
+
+In addition to the MsExperimentStash formats for storage of
+`MsExperiment` objects, it is possible to load data from a metabolomics
+study directly from the
+[MetaboLights](https://www.ebi.ac.uk/metabolights/) repository. See
+[MetaboLightsParam](https://rformassspectrometry.github.io/MsExperimentStash/reference/MetaboLightsParam.md)
+for more information.
+
+## See also
+
+[MetaboLightsParam](https://rformassspectrometry.github.io/MsExperimentStash/reference/MetaboLightsParam.md)
+for loading an `MsExperiment` from the MetaboLights public repository.
+
 ## Author
 
 Philippine Louail, Johannes Rainer
@@ -229,7 +243,7 @@ saveMsObject(mse, AlabasterParam(d), consolidate = TRUE)
 ## Show the content of the stash folder
 library(fs)
 dir_tree(d)
-#> /tmp/RtmpWSXkiZ/ms_experiment_stash
+#> /tmp/RtmpB00ZqG/ms_experiment_stash
 #> ├── OBJECT
 #> ├── _environment.json
 #> ├── experiment_files
@@ -259,9 +273,9 @@ dir_tree(d)
 #> └── spectra
 #>     ├── OBJECT
 #>     ├── backend
+#>     │   ├── 10883dc0fa5b_7860
+#>     │   ├── 108862219686_7859
 #>     │   ├── OBJECT
-#>     │   ├── fa610ad99f9_7859
-#>     │   ├── fa6148d296d_7860
 #>     │   └── spectra_data
 #>     │       ├── OBJECT
 #>     │       └── basic_columns.h5
@@ -290,10 +304,10 @@ res
 
 sampleData(res)
 #> DataFrame with 2 rows and 3 columns
-#>                         name     index spectraOrigin
-#>                  <character> <integer>   <character>
-#> fa610ad99f9_7859           A         1 /github/ho...
-#> fa6148d296d_7860           B         2 /github/ho...
+#>                          name     index spectraOrigin
+#>                   <character> <integer>   <character>
+#> 108862219686_7859           A         1 /github/ho...
+#> 10883dc0fa5b_7860           B         2 /github/ho...
 
 spectra(res)
 #> MSn data (Spectra) with 1862 spectra in a MsBackendMzR backend:
@@ -313,6 +327,6 @@ spectra(res)
 #>  ... 25 more variables/columns.
 #> 
 #> file(s):
-#> fa610ad99f9_7859
-#> fa6148d296d_7860
+#> 108862219686_7859
+#> 10883dc0fa5b_7860
 ```

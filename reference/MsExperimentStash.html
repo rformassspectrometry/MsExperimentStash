@@ -13,7 +13,7 @@ The supported stash formats are listed in the sections below."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">MsExperimentStash</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.97.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.97.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -21,7 +21,8 @@ The supported stash formats are listed in the sections below."></head><body>
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
-      <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+      <ul class="navbar-nav me-auto"><li class="nav-item"><a class="nav-link" href="../articles/MsExperimentStash.html">Get started</a></li>
+<li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
@@ -160,6 +161,21 @@ files if parameter <code>consolidate = TRUE</code> is used in <code>saveMsObject
 See <a href="https://rdrr.io/pkg/SpectraStash/man/SpectraStash.html" class="external-link">SpectraStash::SpectraStash</a> for more information.</p>
     </div>
     <div class="section level2">
+    <h2 id="retrieve-ms-data-from-metabolights">Retrieve MS data from <em>MetaboLights</em><a class="anchor" aria-label="anchor" href="#retrieve-ms-data-from-metabolights"></a></h2>
+
+
+
+<p>In addition to the MsExperimentStash formats for storage of <code>MsExperiment</code>
+objects, it is possible to load data from a metabolomics study directly
+from the <a href="https://www.ebi.ac.uk/metabolights/" class="external-link">MetaboLights</a> repository.
+See <a href="MetaboLightsParam.html">MetaboLightsParam</a> for more information.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
+    <div class="dont-index"><p><a href="MetaboLightsParam.html">MetaboLightsParam</a> for loading an <code>MsExperiment</code> from the
+MetaboLights public repository.</p></div>
+    </div>
+    <div class="section level2">
     <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>
     <p>Philippine Louail, Johannes Rainer</p>
 <p>Philippine Louail</p>
@@ -231,7 +247,7 @@ See <a href="https://rdrr.io/pkg/SpectraStash/man/SpectraStash.html" class="exte
 <span class="r-in"><span><span class="co">## Show the content of the stash folder</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://fs.r-lib.org" class="external-link">fs</a></span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://fs.r-lib.org/reference/dir_tree.html" class="external-link">dir_tree</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-weight: bold;">/tmp/RtmpWSXkiZ/ms_experiment_stash</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-weight: bold;">/tmp/RtmpB00ZqG/ms_experiment_stash</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ├── OBJECT</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ├── _environment.json</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ├── <span style="color: #0000BB; font-weight: bold;">experiment_files</span></span>
@@ -261,9 +277,9 @@ See <a href="https://rdrr.io/pkg/SpectraStash/man/SpectraStash.html" class="exte
 <span class="r-out co"><span class="r-pr">#&gt;</span> └── <span style="color: #0000BB; font-weight: bold;">spectra</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     ├── OBJECT</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     ├── <span style="color: #0000BB; font-weight: bold;">backend</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     │   ├── 10883dc0fa5b_7860</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     │   ├── 108862219686_7859</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     │   ├── OBJECT</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     │   ├── fa610ad99f9_7859</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     │   ├── fa6148d296d_7860</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     │   └── <span style="color: #0000BB; font-weight: bold;">spectra_data</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     │       ├── OBJECT</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     │       └── basic_columns.h5</span>
@@ -292,10 +308,10 @@ See <a href="https://rdrr.io/pkg/SpectraStash/man/SpectraStash.html" class="exte
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/MsExperiment/man/MsExperiment.html" class="external-link">sampleData</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> DataFrame with 2 rows and 3 columns</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                         name     index spectraOrigin</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                  &lt;character&gt; &lt;integer&gt;   &lt;character&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> fa610ad99f9_7859           A         1 /github/ho...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> fa6148d296d_7860           B         2 /github/ho...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                          name     index spectraOrigin</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                   &lt;character&gt; &lt;integer&gt;   &lt;character&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 108862219686_7859           A         1 /github/ho...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10883dc0fa5b_7860           B         2 /github/ho...</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/ProtGenerics/man/protgenerics.html" class="external-link">spectra</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> MSn data (Spectra) with 1862 spectra in a MsBackendMzR backend:</span>
@@ -315,8 +331,8 @@ See <a href="https://rdrr.io/pkg/SpectraStash/man/SpectraStash.html" class="exte
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ... 25 more variables/columns.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> file(s):</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> fa610ad99f9_7859</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> fa6148d296d_7860</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 108862219686_7859</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10883dc0fa5b_7860</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
