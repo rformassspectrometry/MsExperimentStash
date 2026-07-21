@@ -138,7 +138,7 @@ library(fs)
 dir_tree(d)
 ```
 
-    ## /tmp/RtmpirqO2C/file12bf665e0799/mse_stash
+    ## /tmp/Rtmp2DO2vJ/file11396108b651/mse_stash
     ## ├── OBJECT
     ## ├── _environment.json
     ## ├── experiment_files
@@ -276,8 +276,8 @@ sps
     ##  ... 25 more variables/columns.
     ## 
     ## file(s):
-    ## 108862219686_7859
-    ## 10883dc0fa5b_7860
+    ## f021c4781ac_7859
+    ## f024ebec6d8_7860
 
 Or only the `SummarizedExperiment` from the *qdata* sub-folder (using
 *alabaster.base* functions):
@@ -323,8 +323,8 @@ spectra(mse)
     ##  ... 34 more variables/columns.
     ## 
     ## file(s):
-    ## 108862219686_7859
-    ## 10883dc0fa5b_7860
+    ## f021c4781ac_7859
+    ## f024ebec6d8_7860
 
 This type of backend keeps only the spectra metadata in memory while the
 mass peaks data (*m/z* and intensity values) are retrieved on demand
@@ -358,10 +358,10 @@ expected *mzML* file ending, because the data was provided through the
 dir_tree(file.path(d, "spectra", "backend"))
 ```
 
-    ## /tmp/RtmpirqO2C/portable_stash/spectra/backend
-    ## ├── 10883dc0fa5b_7860
-    ## ├── 108862219686_7859
+    ## /tmp/Rtmp2DO2vJ/portable_stash/spectra/backend
     ## ├── OBJECT
+    ## ├── f021c4781ac_7859
+    ## ├── f024ebec6d8_7860
     ## └── spectra_data
     ##     ├── OBJECT
     ##     └── basic_columns.h5
@@ -393,7 +393,7 @@ format) within the stash.
 dir_tree(file.path(d, "spectra", "backend"))
 ```
 
-    ## /tmp/RtmpirqO2C/memory_stash/spectra/backend
+    ## /tmp/Rtmp2DO2vJ/memory_stash/spectra/backend
     ## ├── OBJECT
     ## └── backend
     ##     ├── OBJECT
@@ -611,7 +611,7 @@ We can see that it is much simpler.
 sessionInfo()
 ```
 
-    ## R version 4.6.0 (2026-04-24)
+    ## R version 4.6.1 (2026-06-24)
     ## Platform: x86_64-pc-linux-gnu
     ## Running under: Ubuntu 24.04.4 LTS
     ## 
@@ -640,18 +640,18 @@ sessionInfo()
     ##  [5] SummarizedExperiment_1.42.0 Biobase_2.73.1             
     ##  [7] GenomicRanges_1.64.0        Seqinfo_1.3.0              
     ##  [9] IRanges_2.47.2              S4Vectors_0.51.5           
-    ## [11] BiocGenerics_0.59.8         generics_0.1.4             
+    ## [11] BiocGenerics_0.59.10        generics_0.1.4             
     ## [13] MatrixGenerics_1.25.0       matrixStats_1.5.0          
     ## [15] MsDataHub_1.13.0            MsExperimentStash_0.97.3   
     ## [17] MsStash_0.99.0              MsExperiment_1.14.0        
     ## [19] ProtGenerics_1.45.0         BiocStyle_2.40.0           
     ## 
     ## loaded via a namespace (and not attached):
-    ##   [1] DBI_1.3.0                   httr2_1.2.2                
-    ##   [3] rlang_1.2.0                 magrittr_2.0.5             
+    ##   [1] DBI_1.3.0                   httr2_1.3.0                
+    ##   [3] rlang_1.3.0                 magrittr_2.0.5             
     ##   [5] clue_0.3-68                 otel_0.2.0                 
-    ##   [7] MsBackendMetaboLights_1.6.1 compiler_4.6.0             
-    ##   [9] RSQLite_3.53.2              png_0.1-9                  
+    ##   [7] MsBackendMetaboLights_1.6.1 compiler_4.6.1             
+    ##   [9] RSQLite_3.53.3              png_0.1-9                  
     ##  [11] systemfonts_1.3.2           vctrs_0.7.3                
     ##  [13] reshape2_1.4.5              stringr_1.6.0              
     ##  [15] crayon_1.5.3                pkgconfig_2.0.3            
@@ -659,34 +659,34 @@ sessionInfo()
     ##  [19] dbplyr_2.6.0                XVector_0.53.0             
     ##  [21] rmarkdown_2.31              ragg_1.5.2                 
     ##  [23] purrr_1.2.2                 bit_4.6.0                  
-    ##  [25] xfun_0.59                   MultiAssayExperiment_1.38.0
+    ##  [25] xfun_0.60                   MultiAssayExperiment_1.38.0
     ##  [27] cachem_1.1.0                jsonlite_2.0.0             
     ##  [29] progress_1.2.3              blob_1.3.0                 
     ##  [31] rhdf5filters_1.25.0         DelayedArray_0.39.3        
     ##  [33] Rhdf5lib_2.1.0              prettyunits_1.2.0          
-    ##  [35] parallel_4.6.0              cluster_2.1.8.2            
+    ##  [35] parallel_4.6.1              cluster_2.1.8.2            
     ##  [37] R6_2.6.1                    bslib_0.11.0               
     ##  [39] stringi_1.8.7               jquerylib_0.1.4            
-    ##  [41] Rcpp_1.1.1-1.1              bookdown_0.47              
+    ##  [41] Rcpp_1.1.2                  bookdown_0.47              
     ##  [43] knitr_1.51                  Matrix_1.7-5               
-    ##  [45] igraph_2.3.2                tidyselect_1.2.1           
+    ##  [45] igraph_2.3.3                tidyselect_1.2.1           
     ##  [47] abind_1.4-8                 yaml_2.3.12                
     ##  [49] codetools_0.2-20            curl_7.1.0                 
     ##  [51] lattice_0.22-9              tibble_3.3.1               
     ##  [53] plyr_1.8.9                  withr_3.0.3                
     ##  [55] KEGGREST_1.53.1             evaluate_1.0.5             
     ##  [57] desc_1.4.3                  BiocFileCache_3.3.0        
-    ##  [59] alabaster.schemas_1.13.0    Biostrings_2.81.3          
+    ##  [59] alabaster.schemas_1.13.0    Biostrings_2.81.5          
     ##  [61] ExperimentHub_3.3.0         pillar_1.11.1              
     ##  [63] BiocManager_1.30.27         filelock_1.0.3             
     ##  [65] ncdf4_1.24                  SpectraStash_0.97.6        
     ##  [67] hms_1.1.4                   BiocVersion_3.23.1         
     ##  [69] alabaster.ranges_1.12.0     glue_1.8.1                 
     ##  [71] alabaster.matrix_1.12.0     lazyeval_0.2.3             
-    ##  [73] tools_4.6.0                 AnnotationHub_4.3.2        
+    ##  [73] tools_4.6.1                 AnnotationHub_4.3.2        
     ##  [75] data.table_1.18.4           mzR_2.46.0                 
     ##  [77] QFeatures_1.22.0            rhdf5_2.57.1               
-    ##  [79] grid_4.6.0                  tidyr_1.3.2                
+    ##  [79] grid_4.6.1                  tidyr_1.3.2                
     ##  [81] MsCoreUtils_1.25.4          AnnotationDbi_1.75.0       
     ##  [83] HDF5Array_1.40.0            cli_3.6.6                  
     ##  [85] rappdirs_0.3.4              textshaping_1.0.5          
@@ -695,6 +695,6 @@ sessionInfo()
     ##  [91] sass_0.4.10                 digest_0.6.39              
     ##  [93] SparseArray_1.13.2          htmlwidgets_1.6.4          
     ##  [95] memoise_2.0.1               htmltools_0.5.9            
-    ##  [97] pkgdown_2.2.0.9000          lifecycle_1.0.5            
+    ##  [97] pkgdown_2.2.1.9000          lifecycle_1.0.5            
     ##  [99] h5mread_1.4.0               httr_1.4.8                 
-    ## [101] bit64_4.8.2                 MASS_7.3-65
+    ## [101] bit64_4.8.2                 MASS_7.3-66
