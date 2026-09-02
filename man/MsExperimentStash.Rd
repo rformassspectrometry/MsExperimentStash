@@ -35,6 +35,10 @@ such as \code{consolidate}. For \code{readMsObject()}: optional arguments for th
 
 \item{path}{For \code{saveObject()}:}
 }
+\value{
+\code{readMsObject()} and \code{readObject()} return an \code{MsExperiment} object with
+content read from the specified MsExperimentStash.
+}
 \description{
 \code{MsExperiment} objects can be stored to (or read from) \emph{MsExperimentStash}es
 using the \code{saveMsObject()} and \code{readMsObject()} functions which take a

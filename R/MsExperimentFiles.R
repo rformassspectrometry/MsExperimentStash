@@ -169,7 +169,3 @@ setMethod("readMsObject", signature(object = "MsExperimentFiles",
           function(object, param, ...) {
               readAlabasterMsExperimentFiles(path = param@path)
           })
-
-################################################################################
-##    Utility functions
-################################################################################

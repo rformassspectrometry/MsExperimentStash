@@ -8,25 +8,35 @@ importClassesFrom(MsStash,PlainTextParam)
 importClassesFrom(ProtGenerics,Param)
 importClassesFrom(S4Vectors,SimpleList)
 importFrom(MsCoreUtils,retry)
-importFrom(MsExperiment,MsExperiment)
-importFrom(MsExperiment,MsExperimentFiles)
-importFrom(MsExperiment,experimentFiles)
-importFrom(MsExperiment,linkSampleData)
-importFrom(S4Vectors,DataFrame)
-importFrom(S4Vectors,SimpleList)
+importFrom(MsExperiment,
+  MsExperiment,
+  MsExperimentFiles,
+  experimentFiles,
+  linkSampleData
+)
+importFrom(S4Vectors,
+  DataFrame,
+  SimpleList
+)
 importFrom(Spectra,Spectra)
-importFrom(alabaster.base,altReadObject)
-importFrom(alabaster.base,altSaveObject)
-importFrom(alabaster.base,readObjectFile)
-importFrom(alabaster.base,registerReadObjectFunction)
-importFrom(alabaster.base,registerValidateObjectFunction)
-importFrom(alabaster.base,saveObjectFile)
-importFrom(methods,as)
-importFrom(methods,new)
-importFrom(methods,validObject)
-importFrom(utils,menu)
-importFrom(utils,read.table)
-importFrom(utils,write.table)
+importFrom(alabaster.base,
+  altReadObject,
+  altSaveObject,
+  readObjectFile,
+  registerReadObjectFunction,
+  registerValidateObjectFunction,
+  saveObjectFile
+)
+importFrom(methods,
+  as,
+  new,
+  validObject
+)
+importFrom(utils,
+  menu,
+  read.table,
+  write.table
+)
 importMethodsFrom(MsExperiment,spectra)
 importMethodsFrom(MsStash,readMsObject)
 importMethodsFrom(MsStash,saveMsObject)
