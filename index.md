@@ -1,7 +1,7 @@
 # MsExperimentStash
 
-*A safe way to store your `MsExperiment` objects in interoperable
-formats.*
+*A safe way to store and preserve your `MsExperiment` objects in
+interoperable formats.*
 
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
@@ -16,11 +16,19 @@ badge](https://rformassspectrometry.r-universe.dev/badges/:name)](https://rforma
 
 ## Overview
 
-[**MsStash**](https://github.com/RforMassSpectrometry/MsStash) defines a
-framework for flexible, language-agnostic import and export formats for
-mass spectrometry (MS) data objects in R. The **MsExperimentStash**
-package extends this framework and implements the functionality to stash
-(and restore) `MsExperiment` objects.
+The [**MsStash**](https://github.com/RforMassSpectrometry/MsStash)
+Bioconductor package defines a framework for flexible, language-agnostic
+import and export formats for mass spectrometry (MS) data objects in R.
+The **MsExperimentStash** package extends this framework and implements
+the functionality to stash (and restore) `MsExperiment` objects. The
+goal of this stash format is support long term storage, interoperability
+and portability.
+
+## ⤵️ Installation
+
+To install the packages along with all its dependencies:
+
+[`install.packages`](https://rdrr.io/r/utils/install.packages.html)`(``"BiocManager"``)`` ``BiocManager``::`[`install`](https://bioconductor.github.io/BiocManager/reference/install.html)`(``"MsExperimentStash"``)`
 
 ------------------------------------------------------------------------
 

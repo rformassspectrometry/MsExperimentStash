@@ -58,6 +58,13 @@ readMsObject(object, param, ...)
   For
   [`saveObject()`](https://rdrr.io/pkg/alabaster.base/man/saveObject.html):
 
+## Value
+
+`readMsObject()` and
+[`readObject()`](https://rdrr.io/pkg/alabaster.base/man/readObject.html)
+return an `MsExperiment` object with content read from the specified
+MsExperimentStash.
+
 ## Note
 
 Overwriting an existing *MsExperimentStash* is not allowed.
@@ -243,7 +250,7 @@ saveMsObject(mse, AlabasterParam(d), consolidate = TRUE)
 ## Show the content of the stash folder
 library(fs)
 dir_tree(d)
-#> /tmp/RtmpYddgHw/ms_experiment_stash
+#> /tmp/RtmpWZLFpm/ms_experiment_stash
 #> ├── OBJECT
 #> ├── _environment.json
 #> ├── experiment_files
@@ -273,9 +280,9 @@ dir_tree(d)
 #> └── spectra
 #>     ├── OBJECT
 #>     ├── backend
+#>     │   ├── 1a466b602398_7859
+#>     │   ├── 1a46709f2dbf_7860
 #>     │   ├── OBJECT
-#>     │   ├── f021c4781ac_7859
-#>     │   ├── f024ebec6d8_7860
 #>     │   └── spectra_data
 #>     │       ├── OBJECT
 #>     │       └── basic_columns.h5
@@ -304,10 +311,10 @@ res
 
 sampleData(res)
 #> DataFrame with 2 rows and 3 columns
-#>                         name     index spectraOrigin
-#>                  <character> <integer>   <character>
-#> f021c4781ac_7859           A         1 /github/ho...
-#> f024ebec6d8_7860           B         2 /github/ho...
+#>                          name     index spectraOrigin
+#>                   <character> <integer>   <character>
+#> 1a466b602398_7859           A         1 /github/ho...
+#> 1a46709f2dbf_7860           B         2 /github/ho...
 
 spectra(res)
 #> MSn data (Spectra) with 1862 spectra in a MsBackendMzR backend:
@@ -327,6 +334,6 @@ spectra(res)
 #>  ... 25 more variables/columns.
 #> 
 #> file(s):
-#> f021c4781ac_7859
-#> f024ebec6d8_7860
+#> 1a466b602398_7859
+#> 1a46709f2dbf_7860
 ```
