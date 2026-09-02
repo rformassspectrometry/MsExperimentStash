@@ -1,3 +1,9 @@
+# *MsExperimentStash* 0.99
+
+## Changes in version 0.99.0
+
+- Prepare and clean package for submission to Bioconductor.
+
 # *MsExperimentStash* 0.97
 
 ## Changes in version 0.97.3

@@ -4,14 +4,14 @@ output:
     BiocStyle::html_document:
         toc_float: true
 vignette: >
-    %\VignetteIndexEntry{Safely Store MsExperiment Object in a Portable Stash}
+    %\VignetteIndexEntry{Safely Store MsExperiment Objects in a Portable Stash}
     %\VignetteEngine{knitr::rmarkdown}
     %\VignetteEncoding{UTF-8}
     %\VignettePackage{SpectraStash}
     %\VignetteDepends{MsExperiment,Spectra,SpectraStash,BiocStyle,alabaster.base,fs,SummarizedExperiment}
 ---
 
-```{r, echo = FALSE, message = FALSE}
+```{r style, echo = FALSE, message = FALSE}
 knitr::opts_chunk$set(echo = TRUE, message = FALSE)
 library(BiocStyle)
 ```
@@ -34,9 +34,12 @@ also Bioconductor's *alabaster* format defined in the
 # Installation
 
 The package can be installed with the *BiocManager* package. To install
-*BiocManager* use `install.packages("BiocManager")` and, after that,
-`BiocManager::install("RforMassSpectrometry/MsExperimentStash")` to install this
-package.
+*BiocManager* use `install.packages("BiocManager")` and, after that, install
+*MsExperimentStash* including all dependencies with:
+
+```{r install, eval = FALSE}
+BiocManager::install("MsExperimentStash")
+```
 
 # A stash for `MsExperiment` objects
 
@@ -58,7 +61,7 @@ and implementation notes.
 As an example we create below a `MsExperiment` object with MS data two example
 MS data files from the *MsDataHub* package.
 
-```{r, message = FALSE}
+```{r example-data, message = FALSE}
 library(MsExperiment)
 library(MsExperimentStash)
 library(MsDataHub)
@@ -81,7 +84,7 @@ abundances after e.g. preprocessing the data with *xcms*. For our example we
 fill the `SummarizedExperiment` with arbitrary information and random abundance
 values.
 
-```{r}
+```{r example-se}
 #' Define a SummarizedExperiment with quantification data
 library(SummarizedExperiment)
 se <- SummarizedExperiment(
@@ -103,7 +106,7 @@ We next store this `MsExperiment` object to a *MsExperimentStash* using the
 the stash with the `path` parameter of `AlabasterParam`. For the present example
 we save it to a temporary folder.
 
-```{r}
+```{r save-alabaster}
 #' Define the location of the stash
 d <- file.path(tempfile(), "mse_stash")
 
@@ -116,7 +119,7 @@ saveMsObject(mse, ap)
 
 The content of the stash folder is:
 
-```{r}
+```{r stash-content}
 library(fs)
 dir_tree(d)
 ```
@@ -128,7 +131,7 @@ general, users will not interact directly with the files in this stash, but will
 restore the stashed `MsExperiment` from such a *MsExperimentStash* using the
 `readMsObject()` function:
 
-```{r}
+```{r alabaster-read}
 res <- readMsObject(MsExperiment(), ap)
 res
 ```
@@ -140,18 +143,17 @@ serialization formats to `MsExperiment` objects and we can therefore also use
 the `readObject()` from the `r Biocpkg("alabaster.base")` package to restore the
 object.
 
-```{r}
+```{r pure-alabaster-read}
 library(alabaster.base)
 res <- readObject(d)
 res
-
 ```
 
 Due to the modular structure of the *MsExperimentStash* is we can load also only
 a single component of the `MsExperiment`. We can for example restore the
 `Spectra` object from the *spectra* sub-folder:
 
-```{r}
+```{r alabaster-read-spectra}
 library(Spectra)
 sps <- readMsObject(Spectra(), AlabasterParam(file.path(d, "spectra")))
 sps
@@ -160,17 +162,16 @@ sps
 Or only the `SummarizedExperiment` from the *qdata* sub-folder (using
 *alabaster.base* functions):
 
-```{r}
+```{r alabaster-read-qdata}
 readObject(file.path(d, "qdata"))
 ```
-
 
 ## Creating self-contained stashes
 
 The MS data from our example `MsExperiment` is represented by a `Spectra`
 object using an `MsBackendMzR` backend.
 
-```{r}
+```{r show-spectra}
 spectra(mse)
 ```
 
@@ -186,7 +187,7 @@ implementation supports however a parameter `consolidate` which, if set to
 `TRUE` will copy **all** required data **into** the stash generating hence a
 self-contained and portable MsExperimentStash:
 
-```{r}
+```{r alabaster-save-consolidate}
 #' Save the `MsExperiment` to a stash which includes the full data
 d <- file.path(tempdir(), "portable_stash")
 
@@ -197,7 +198,7 @@ The SpectraStash within the MsExperimentStash contains now also the original MS
 data files (which have in this case random names without the expected *mzML*
 file ending, because the data was provided through the *MsDataHub* package):
 
-```{r}
+```{r alabaster-content-consolidate}
 dir_tree(file.path(d, "spectra", "backend"))
 ```
 
@@ -207,7 +208,7 @@ depending on the number and the size of the original MS data files.
 Alternatively, we could also change the backend of the `Spectra` within the
 `MsExperiment` to an *in-memory* backend and create a stash from that object.
 
-```{r, warning = FALSE}
+```{r alabaster-save-in-mem, warning = FALSE}
 #' Change the Spectra backend to MsBackendMemory: load all MS data
 #' into memory
 spectra(mse) <- setBackend(spectra(mse), MsBackendMemory())
@@ -220,7 +221,7 @@ saveMsObject(mse, AlabasterParam(d))
 The full MS data is now stored in a *peaks.h5* file (in HDF5 file format) within
 the stash.
 
-```{r}
+```{r alabaster-content-in-mem}
 dir_tree(file.path(d, "spectra", "backend"))
 ```
 
@@ -245,7 +246,7 @@ specific files; for our example we only load data files with a file ending
 *cdf*. It is recommended to adjust these settings according to your specific
 study.
 
-```{r}
+```{r read-metabolights}
 library(MsExperiment)
 #' Prepare parameter
 param <- MetaboLightsParam(
@@ -259,7 +260,7 @@ mse <- readMsObject(MsExperiment(), param)
 
 Next, we examine the `sampleData()` of our `mse` object:
 
-```{r}
+```{r sampledata}
 sampleData(mse)
 ```
 
@@ -272,7 +273,7 @@ remove columns related to protocol information.  The `simplify = TRUE` option
 duplicate contents. You can set `simplify = FALSE` to retain all columns. Below,
 we load the object again, this time simplifying the `sampleData`:
 
-```{r}
+```{r read-metabolights-less}
 mse <- readMsObject(MsExperiment(), param, keepOntology = FALSE,
                     keepProtocol = FALSE, simplify = TRUE)
 ```
@@ -280,7 +281,7 @@ mse <- readMsObject(MsExperiment(), param, keepOntology = FALSE,
 Note that the MS data files were loaded from the local cache and not downloaded
 again. Now, if we examine the `sampleData` information:
 
-```{r}
+```{r sampledata-less}
 sampleData(mse)
 ```
 
@@ -288,6 +289,6 @@ We can see that it is much simpler.
 
 # Session information
 
-```{r}
+```{r session-info}
 sessionInfo()
 ```

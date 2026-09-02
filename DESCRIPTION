@@ -1,13 +1,13 @@
 Package: MsExperimentStash
-Title: Serialize and restore MsExperiment objects in interoperable file formats
-Version: 0.97.3
+Title: Save and restore MsExperiment objects in interoperable file formats
+Version: 0.99.0
 Authors@R:
     c(person(given = "Johannes", family = "Rainer",
              email = "Johannes.Rainer@eurac.edu",
              role = c("aut", "cre"),
              comment = c(ORCID = "0000-0002-6977-7147")),
       person(given = "Philippine", family = "Louail",
-             email = "philippine.louail@eurac.edu",
+             email = "philippine.louail@outlook.com",
              role = "aut",
              comment = c(ORCID = "0009-0007-5429-6846")),
       person(given = "Laurent", family = "Gatto",
@@ -25,7 +25,9 @@ Description: The serialization mechanism of R allows to save and load R data
              implements the serialization methods from the MsStash package for
              MsExperiment objects. Data can be stashed in a variety of file
 	     formats and types, including HDF5 and JSON-based formats
-             defined by the Bioconductor *alabaster* package.
+             defined by the Bioconductor *alabaster* package. The package
+	     provides also functionality to read a full MS experiment from the
+	     MetaboLights repository.
 Depends:
     R (>= 4.6.0),
     MsStash
@@ -61,4 +63,4 @@ BugReports: https://github.com/RforMassSpectrometry/MsExperimentStash/issues
 URL: https://github.com/RforMassSpectrometry/MsExperimentStash
 biocViews: Infrastructure, MassSpectrometry, Metabolomics, DataImport, Proteomics
 Roxygen: list(markdown=TRUE)
-Config/roxygen2/version: 8.0.0
+Config/roxygen2/version: 8.1.0
