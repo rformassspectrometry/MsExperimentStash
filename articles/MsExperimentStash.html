@@ -50,8 +50,7 @@
 
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-
-      <h1>Safely Store `MsExperiment` Objects in a Portable Stash</h1>
+      <img src="../logo.png" class="logo" alt=""><h1>Safely Store `MsExperiment` Objects in a Portable Stash</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/RforMassSpectrometry/MsExperimentStash/blob/main/vignettes/MsExperimentStash.Rmd" class="external-link"><code>vignettes/MsExperimentStash.Rmd</code></a></small>
@@ -179,7 +178,7 @@ temporary folder.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://fs.r-lib.org" class="external-link">fs</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://fs.r-lib.org/reference/dir_tree.html" class="external-link">dir_tree</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #0000BB; font-weight: bold;">/tmp/RtmpopRS9V/file1c7f7c48aa04/mse_stash</span></span></span>
+<pre><code><span><span class="co">## <span style="color: #0000BB; font-weight: bold;">/tmp/RtmpNrUWpr/file1c7de5b2d05/mse_stash</span></span></span>
 <span><span class="co">## ├── OBJECT</span></span>
 <span><span class="co">## ├── _environment.json</span></span>
 <span><span class="co">## ├── <span style="color: #0000BB; font-weight: bold;">experiment_files</span></span></span>
@@ -299,8 +298,8 @@ We can for example restore the <code>Spectra</code> object from the
 <span><span class="co">##  ... 25 more variables/columns.</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## file(s):</span></span>
-<span><span class="co">## 1a466b602398_7859</span></span>
-<span><span class="co">## 1a46709f2dbf_7860</span></span></code></pre>
+<span><span class="co">## 1a452fae342c_7859</span></span>
+<span><span class="co">## 1a4516746842_7860</span></span></code></pre>
 <p>Or only the <code>SummarizedExperiment</code> from the <em>qdata</em>
 sub-folder (using <em>alabaster.base</em> functions):</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
@@ -338,8 +337,8 @@ backend.</p>
 <span><span class="co">##  ... 34 more variables/columns.</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## file(s):</span></span>
-<span><span class="co">## 1a466b602398_7859</span></span>
-<span><span class="co">## 1a46709f2dbf_7860</span></span></code></pre>
+<span><span class="co">## 1a452fae342c_7859</span></span>
+<span><span class="co">## 1a4516746842_7860</span></span></code></pre>
 <p>This type of backend keeps only the spectra metadata in memory while
 the mass peaks data (<em>m/z</em> and intensity values) are retrieved on
 demand from the original MS data files. By default, when saved to a
@@ -365,9 +364,9 @@ expected <em>mzML</em> file ending, because the data was provided
 through the <em>MsDataHub</em> package):</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://fs.r-lib.org/reference/dir_tree.html" class="external-link">dir_tree</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">d</span>, <span class="st">"spectra"</span>, <span class="st">"backend"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #0000BB; font-weight: bold;">/tmp/RtmpopRS9V/portable_stash/spectra/backend</span></span></span>
-<span><span class="co">## ├── 1a466b602398_7859</span></span>
-<span><span class="co">## ├── 1a46709f2dbf_7860</span></span>
+<pre><code><span><span class="co">## <span style="color: #0000BB; font-weight: bold;">/tmp/RtmpNrUWpr/portable_stash/spectra/backend</span></span></span>
+<span><span class="co">## ├── 1a4516746842_7860</span></span>
+<span><span class="co">## ├── 1a452fae342c_7859</span></span>
 <span><span class="co">## ├── OBJECT</span></span>
 <span><span class="co">## └── <span style="color: #0000BB; font-weight: bold;">spectra_data</span></span></span>
 <span><span class="co">##     ├── OBJECT</span></span>
@@ -390,7 +389,7 @@ files.</p>
 file format) within the stash.</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://fs.r-lib.org/reference/dir_tree.html" class="external-link">dir_tree</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">d</span>, <span class="st">"spectra"</span>, <span class="st">"backend"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #0000BB; font-weight: bold;">/tmp/RtmpopRS9V/memory_stash/spectra/backend</span></span></span>
+<pre><code><span><span class="co">## <span style="color: #0000BB; font-weight: bold;">/tmp/RtmpNrUWpr/memory_stash/spectra/backend</span></span></span>
 <span><span class="co">## ├── OBJECT</span></span>
 <span><span class="co">## └── <span style="color: #0000BB; font-weight: bold;">backend</span></span></span>
 <span><span class="co">##     ├── OBJECT</span></span>
@@ -613,7 +612,7 @@ information:</p>
 <span><span class="co">## </span></span>
 <span><span class="co">## other attached packages:</span></span>
 <span><span class="co">##  [1] Spectra_1.23.4              BiocParallel_1.47.0        </span></span>
-<span><span class="co">##  [3] alabaster.base_1.13.2       fs_2.1.0                   </span></span>
+<span><span class="co">##  [3] alabaster.base_1.13.4       fs_2.1.0                   </span></span>
 <span><span class="co">##  [5] SummarizedExperiment_1.42.0 Biobase_2.73.2             </span></span>
 <span><span class="co">##  [7] GenomicRanges_1.64.0        Seqinfo_1.3.2              </span></span>
 <span><span class="co">##  [9] IRanges_2.47.5              S4Vectors_0.51.9           </span></span>
@@ -645,7 +644,7 @@ information:</p>
 <span><span class="co">##  [37] R6_2.6.1                    bslib_0.12.0               </span></span>
 <span><span class="co">##  [39] stringi_1.8.9               jquerylib_0.1.4            </span></span>
 <span><span class="co">##  [41] Rcpp_1.1.2                  bookdown_0.48              </span></span>
-<span><span class="co">##  [43] knitr_1.51                  BiocBaseUtils_1.15.1       </span></span>
+<span><span class="co">##  [43] knitr_1.52                  BiocBaseUtils_1.15.1       </span></span>
 <span><span class="co">##  [45] Matrix_1.7-6                igraph_2.3.3               </span></span>
 <span><span class="co">##  [47] tidyselect_1.2.1            abind_1.4-8                </span></span>
 <span><span class="co">##  [49] yaml_2.3.12                 codetools_0.2-20           </span></span>
@@ -654,7 +653,7 @@ information:</p>
 <span><span class="co">##  [55] withr_3.0.3                 KEGGREST_1.53.6            </span></span>
 <span><span class="co">##  [57] evaluate_1.0.5              desc_1.4.3                 </span></span>
 <span><span class="co">##  [59] BiocFileCache_3.3.0         alabaster.schemas_1.13.0   </span></span>
-<span><span class="co">##  [61] Biostrings_2.81.6           ExperimentHub_3.3.2        </span></span>
+<span><span class="co">##  [61] Biostrings_2.81.9           ExperimentHub_3.3.2        </span></span>
 <span><span class="co">##  [63] pillar_1.11.1               BiocManager_1.30.27        </span></span>
 <span><span class="co">##  [65] filelock_1.0.3              ncdf4_1.24                 </span></span>
 <span><span class="co">##  [67] SpectraStash_0.99.1         hms_1.1.4                  </span></span>

@@ -93,7 +93,7 @@ The content of the stash folder is:
 
 [`library`](https://rdrr.io/r/base/library.html)`(`[`fs`](https://fs.r-lib.org)`)`` `[`dir_tree`](https://fs.r-lib.org/reference/dir_tree.html)`(``d``)`
 
-    ## /tmp/RtmpopRS9V/file1c7f7c48aa04/mse_stash
+    ## /tmp/RtmpNrUWpr/file1c7de5b2d05/mse_stash
     ## ├── OBJECT
     ## ├── _environment.json
     ## ├── experiment_files
@@ -217,8 +217,8 @@ restore the `Spectra` object from the *spectra* sub-folder:
     ##  ... 25 more variables/columns.
     ## 
     ## file(s):
-    ## 1a466b602398_7859
-    ## 1a46709f2dbf_7860
+    ## 1a452fae342c_7859
+    ## 1a4516746842_7860
 
 Or only the `SummarizedExperiment` from the *qdata* sub-folder (using
 *alabaster.base* functions):
@@ -258,8 +258,8 @@ The MS data from our example `MsExperiment` is represented by a
     ##  ... 34 more variables/columns.
     ## 
     ## file(s):
-    ## 1a466b602398_7859
-    ## 1a46709f2dbf_7860
+    ## 1a452fae342c_7859
+    ## 1a4516746842_7860
 
 This type of backend keeps only the spectra metadata in memory while the
 mass peaks data (*m/z* and intensity values) are retrieved on demand
@@ -284,9 +284,9 @@ expected *mzML* file ending, because the data was provided through the
 
 [`dir_tree`](https://fs.r-lib.org/reference/dir_tree.html)`(`[`file.path`](https://rdrr.io/r/base/file.path.html)`(``d``, ``"spectra"``, ``"backend"``)``)`
 
-    ## /tmp/RtmpopRS9V/portable_stash/spectra/backend
-    ## ├── 1a466b602398_7859
-    ## ├── 1a46709f2dbf_7860
+    ## /tmp/RtmpNrUWpr/portable_stash/spectra/backend
+    ## ├── 1a4516746842_7860
+    ## ├── 1a452fae342c_7859
     ## ├── OBJECT
     ## └── spectra_data
     ##     ├── OBJECT
@@ -307,7 +307,7 @@ format) within the stash.
 
 [`dir_tree`](https://fs.r-lib.org/reference/dir_tree.html)`(`[`file.path`](https://rdrr.io/r/base/file.path.html)`(``d``, ``"spectra"``, ``"backend"``)``)`
 
-    ## /tmp/RtmpopRS9V/memory_stash/spectra/backend
+    ## /tmp/RtmpNrUWpr/memory_stash/spectra/backend
     ## ├── OBJECT
     ## └── backend
     ##     ├── OBJECT
@@ -526,7 +526,7 @@ We can see that it is much simpler.
     ## 
     ## other attached packages:
     ##  [1] Spectra_1.23.4              BiocParallel_1.47.0        
-    ##  [3] alabaster.base_1.13.2       fs_2.1.0                   
+    ##  [3] alabaster.base_1.13.4       fs_2.1.0                   
     ##  [5] SummarizedExperiment_1.42.0 Biobase_2.73.2             
     ##  [7] GenomicRanges_1.64.0        Seqinfo_1.3.2              
     ##  [9] IRanges_2.47.5              S4Vectors_0.51.9           
@@ -558,7 +558,7 @@ We can see that it is much simpler.
     ##  [37] R6_2.6.1                    bslib_0.12.0               
     ##  [39] stringi_1.8.9               jquerylib_0.1.4            
     ##  [41] Rcpp_1.1.2                  bookdown_0.48              
-    ##  [43] knitr_1.51                  BiocBaseUtils_1.15.1       
+    ##  [43] knitr_1.52                  BiocBaseUtils_1.15.1       
     ##  [45] Matrix_1.7-6                igraph_2.3.3               
     ##  [47] tidyselect_1.2.1            abind_1.4-8                
     ##  [49] yaml_2.3.12                 codetools_0.2-20           
@@ -567,7 +567,7 @@ We can see that it is much simpler.
     ##  [55] withr_3.0.3                 KEGGREST_1.53.6            
     ##  [57] evaluate_1.0.5              desc_1.4.3                 
     ##  [59] BiocFileCache_3.3.0         alabaster.schemas_1.13.0   
-    ##  [61] Biostrings_2.81.6           ExperimentHub_3.3.2        
+    ##  [61] Biostrings_2.81.9           ExperimentHub_3.3.2        
     ##  [63] pillar_1.11.1               BiocManager_1.30.27        
     ##  [65] filelock_1.0.3              ncdf4_1.24                 
     ##  [67] SpectraStash_0.99.1         hms_1.1.4                  
