@@ -22,14 +22,13 @@ Data objects in R can be serialized to disk in R's *rds* or *RData* format using
 the base R `save()` function and re-imported using the `load()` function. This
 R-specific binary data format can however not be used easily in other
 programming languages preventing the exchange of R data objects between
-software. The *MsStash* package defines basic classes and generic methods to
-export and import mass spectrometry (MS) data objects in various storage formats
-aiming to facilitate data exchange between software. The *MsExperimentStash*
-package implements portable data storage formats (stashes) for data classes from
-the `r Biocpkg("MsExperiment")` package, including the `MsExperiment`
-object. Supported stash formats are, next to storage in simple plain text files,
-also Bioconductor's *alabaster* format defined in the
-`r Biocpkg("alabaster.base")` and related packages.
+software. The `r Biocpkg("MsStash")` package defines basic classes and generic
+methods to export and import mass spectrometry (MS) data objects in various
+storage formats aiming to facilitate data exchange between software. The *MsExperimentStash* package implements portable data storage formats
+(stashes) for data classes from the `r Biocpkg("MsExperiment")` package,
+including the `MsExperiment` object. Supported stash formats are, next to
+storage in simple plain text files, also Bioconductor's *alabaster* format
+defined in the `r Biocpkg("alabaster.base")` and related packages.
 
 # Installation
 
@@ -44,13 +43,13 @@ BiocManager::install("MsExperimentStash")
 # A stash for `MsExperiment` objects
 
 MS data objects can be saved and restored through the `saveMsObject()` and
-`readMsObject()` functions into (or from) MS data stashes. Supported stash
+`readMsObject()` functions to (or from) MS data stashes. Supported stash
 formats and their respective parameter objects are:
 
 - `AlabasterParam`: storage of MS data using Bioconductor's
   `r Biocpkg("alabaster.base")` framework using files in HDF5 and JSON format.
-  MS stashes in this format fully support the functions `saveObject()` and
-  `readObject()` from *alabaster.base*.
+  MS stashes in this format also fully support the `saveObject()` and
+  `readObject()` functions from *alabaster.base*.
 - `PlainTextParam`: storage of data in (a custom) plain text file format. Note
   that this format currently does not support all data structures potentially
   present in an `MsExperiment` and hence the alabaster format is preferred.
@@ -65,6 +64,8 @@ MS data files from the *MsDataHub* package.
 library(MsExperiment)
 library(MsExperimentStash)
 library(MsDataHub)
+
+#' Define the MS data files (provided by MsDataHub)
 fls <- c(X20171016_POOL_POS_1_105.134.mzML(),
          X20171016_POOL_POS_3_105.134.mzML())
 
@@ -80,9 +81,9 @@ mse
 
 We next create a `SummarizedExperiment` and add that to the `MsExperiment`
 object. In a real-world use case this would contain quantitative feature
-abundances after e.g. preprocessing the data with *xcms*. For our example we
-fill the `SummarizedExperiment` with arbitrary information and random abundance
-values.
+abundances after e.g. preprocessing the data with the `r Biocpkg("xcms")`
+package. For our example we fill the `SummarizedExperiment` with random
+abundance values.
 
 ```{r example-se}
 #' Define a SummarizedExperiment with quantification data
@@ -132,16 +133,17 @@ restore the stashed `MsExperiment` from such a *MsExperimentStash* using the
 `readMsObject()` function:
 
 ```{r alabaster-read}
+#' Load the `MsExperiment` from the stash
 res <- readMsObject(MsExperiment(), ap)
 res
 ```
 
 For `readMsObject()` we need to specify the type of the object to restore from
 the stash with the first parameter of the function - in our case
-`MsExperiment()`. *MsExperimentStash* adds full support for *alabaster*-based
-serialization formats to `MsExperiment` objects and we can therefore also use
-the `readObject()` from the `r Biocpkg("alabaster.base")` package to restore the
-object.
+`MsExperiment()`. *MsExperimentStash* provides full support for
+*alabaster*-based serialization formats to `MsExperiment` objects and we can
+therefore also use the `readObject()` from the `r Biocpkg("alabaster.base")`
+package to restore the object.
 
 ```{r pure-alabaster-read}
 library(alabaster.base)
@@ -149,11 +151,12 @@ res <- readObject(d)
 res
 ```
 
-Due to the modular structure of the *MsExperimentStash* is we can load also only
+Due to the modular structure of the *MsExperimentStash* we can load also only
 a single component of the `MsExperiment`. We can for example restore the
 `Spectra` object from the *spectra* sub-folder:
 
 ```{r alabaster-read-spectra}
+#' Read the `Spectra` object with the MS data from the stash
 library(Spectra)
 sps <- readMsObject(Spectra(), AlabasterParam(file.path(d, "spectra")))
 sps
@@ -163,6 +166,7 @@ Or only the `SummarizedExperiment` from the *qdata* sub-folder (using
 *alabaster.base* functions):
 
 ```{r alabaster-read-qdata}
+#' Read the `SummarizedExperiment` from the stash
 readObject(file.path(d, "qdata"))
 ```
 
@@ -182,9 +186,9 @@ the **reference** to the original MS data tiles are serialized to disk. If the
 MS data files are moved to another folder, or if the MsExperimentStash is moved
 to another computer, the data can not be fully restored (unless the path to the
 new location of the MS data files is provided with parameter `spectraPath` in
-`readMsObject()`). The stash functionality for most `Spectra` backend
+the `readMsObject()` call). The stash functionality for most `Spectra` backend
 implementation supports however a parameter `consolidate` which, if set to
-`TRUE` will copy **all** required data **into** the stash generating hence a
+`TRUE` will copy **all** data **into** the stash hence generating a
 self-contained and portable MsExperimentStash:
 
 ```{r alabaster-save-consolidate}
@@ -199,6 +203,7 @@ data files (which have in this case random names without the expected *mzML*
 file ending, because the data was provided through the *MsDataHub* package):
 
 ```{r alabaster-content-consolidate}
+#' Directory content of the spectra subfolder
 dir_tree(file.path(d, "spectra", "backend"))
 ```
 
@@ -225,26 +230,29 @@ the stash.
 dir_tree(file.path(d, "spectra", "backend"))
 ```
 
+Again, because the full MS data is included in the stash, the size of the folder
+might be large.
+
 # Retrieve MS experiments from MetaboLights
 
-The *MetaboLights* database is one of the main repositories to deposit
-metabolomics data sets and experiments. With `readMsObject()` and a
-`MetaboLightsParam` it is possible to retrieve and load the data set from a
-MetaboLights study directly as an `MsExperiment` object. Sample and
-protocol/metadata information is loaded into the object's `sampleData()` while
-the MS data files are downloaded and locally cached through the
+*MetaboLights* is one of the main repositories to deposit metabolomics data sets
+and experiments. With `readMsObject()` and a `MetaboLightsParam` it is possible
+to retrieve and load the data set from a MetaboLights study directly as an
+`MsExperiment` object from the repository into R. Sample and protocol/metadata
+information is loaded into the object's `sampleData()` while the MS data files
+are downloaded and locally cached through the
 `r Biocpkg("MsBackendMetaboLights")` package. This data is available through the
 object's `spectra()` data.
 
-Below, we demonstrate how to load the dataset with the ID: *MTBLS575*.
-We also use the `assayName` parameter to specify which assay we want to load,
-and the `filePattern` parameter to indicate which assay files to load. Defining
-the assay name is required for studies that have more than one *assay* (e.g.,
-data measured in positive and polarity modes or using different chromatographic
-setups). The `filePattern` on the other hand allows to restrict downloading to
-specific files; for our example we only load data files with a file ending
-*cdf*. It is recommended to adjust these settings according to your specific
-study.
+Below, we demonstrate how to load the dataset with the ID: *MTBLS575*.  We also
+use the `assayName` parameter to specify which assay we want to load, and the
+`filePattern` parameter to indicate which assay files to load. Defining the
+assay name is required for studies that have more than one *assay* (e.g., data
+measured in positive and negative polarity modes or using different
+chromatographic setups). The `filePattern` on the other hand allows to restrict
+downloading only selected files; for our example we load only data files with a
+file ending *cdf*. It is recommended to adjust these settings according to your
+specific study.
 
 ```{r read-metabolights}
 library(MsExperiment)
@@ -264,14 +272,15 @@ Next, we examine the `sampleData()` of our `mse` object:
 sampleData(mse)
 ```
 
-We observe that a large number of columns are present. Several parameters are
-available in the `readMsObject()` function to simplify and restrict the content
-loaded into the `sampleData`. Setting `keepOntology = FALSE` will for example
-remove columns related to ontology terms, while `keepProtocol = FALSE` will
-remove columns related to protocol information.  The `simplify = TRUE` option
-(the default) removes `NA`s and merges columns with different names but
-duplicate contents. You can set `simplify = FALSE` to retain all columns. Below,
-we load the object again, this time simplifying the `sampleData`:
+A large number of columns were loaded. Several parameters are available in the
+`readMsObject()` function to simplify and restrict the content loaded into the
+`sampleData`. Setting `keepOntology = FALSE` will for example remove columns
+related to ontology terms, while `keepProtocol = FALSE` will remove columns
+related to protocol information.  The `simplify = TRUE` option (the default)
+removes columns containing only missing values (`NA`) and merges columns with
+different names but duplicate contents. Set to `simplify = FALSE` to retain
+all columns. Below, we load the object again, this time simplifying the
+`sampleData`:
 
 ```{r read-metabolights-less}
 mse <- readMsObject(MsExperiment(), param, keepOntology = FALSE,

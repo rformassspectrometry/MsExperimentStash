@@ -1,5 +1,3 @@
-## Parameter object to retrieve data from MetaboLights.
-
 #' @title Load Content from a MetaboLights Study
 #'
 #' @name MetaboLightsParam
@@ -10,8 +8,9 @@
 #' allow users to load an [MsExperiment::MsExperiment] object from a study in
 #' the MetaboLights database (https://www.ebi.ac.uk/metabolights/index) by
 #' providing its unique study identifier (parameter `mtblsId`). This function
-#' is particularly useful for directly importing metabolomics data into an
-#' `MsExperiment` object for further analysis in the R environment.
+#' is particularly useful for directly importing metabolomics data (MS data and
+#' experimental metadata) into an `MsExperiment` object for further analysis
+#' in the R environment.
 #'
 #' It is important to note that at present it is only possible to *read*
 #' (import) data from MetaboLights, but not to *save* data to MetaboLights.
@@ -70,7 +69,7 @@
 #'
 #' @param ... Currently ignored.
 #'
-#' @returns `readMsObject()` returns an `MsExperiment` object with the
+#' @return `readMsObject()` returns an `MsExperiment` object with the
 #'     `sampleData()` populated with MetaboLights sample and assay information
 #'     and the experiment's MS data loaded as a [Spectra::Spectra] object.
 #'
@@ -130,7 +129,7 @@ setClass("MetaboLightsParam",
 #'
 #' @export
 MetaboLightsParam <- function(mtblsId = character(), assayName = character(),
-                              filePattern = "mzML$|CDF$|cdf$|mzXML$"){
+                              filePattern = "mzML$|CDF$|cdf$|mzXML$") {
     new("MetaboLightsParam", mtblsId = mtblsId, assayName = assayName,
         filePattern = filePattern)
 }

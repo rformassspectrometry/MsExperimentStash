@@ -108,8 +108,8 @@ jobs:
           BiocManager::install("DelayedArray")
           BiocManager::install("Spectra")
           BiocManager::install("alabaster.base")
-          BiocManager::install("RforMassSpectrometry/MsStash")
-          BiocManager::install("RforMassSpectrometry/SpectraStash")
+          BiocManager::install("MsStash")
+          BiocManager::install("SpectraStash")
           pak::local_install_dev_deps(ask = FALSE)
 
           ## Pass #1 at installing dependencies

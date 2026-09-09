@@ -60,8 +60,9 @@ The \code{MetaboLightsParam} class and the associated \code{readMsObject()} meth
 allow users to load an \link[MsExperiment:MsExperiment]{MsExperiment::MsExperiment} object from a study in
 the MetaboLights database (https://www.ebi.ac.uk/metabolights/index) by
 providing its unique study identifier (parameter \code{mtblsId}). This function
-is particularly useful for directly importing metabolomics data into an
-\code{MsExperiment} object for further analysis in the R environment.
+is particularly useful for directly importing metabolomics data (MS data and
+experimental metadata) into an \code{MsExperiment} object for further analysis
+in the R environment.
 
 It is important to note that at present it is only possible to \emph{read}
 (import) data from MetaboLights, but not to \emph{save} data to MetaboLights.

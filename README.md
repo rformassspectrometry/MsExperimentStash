@@ -1,7 +1,7 @@
 # MsExperimentStash
 
 *A safe way to store and preserve your `MsExperiment` objects in interoperable
-formats.*
+and portable formats.*
 
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Test-R-universe](https://github.com/RforMassSpectrometry/SpectraStash/workflows/Test-R-universe/badge.svg)](https://github.com/RforMassSpectrometry/SpectraStash/actions?query=workflow%3ATest-R-universe)
@@ -51,8 +51,8 @@ BiocManager::install("MsExperimentStash")
 - Tab-delimited export/import for key objects.
 
 ### ⤵️ Retrieve data directly from MetaboLights (`MetaboLightsParam`)
-- Load data from a metabolomics study from the
-  [MetaboLights](https://www.ebi.ac.uk/metabolights/) repository
+- Load MS data and experimental metadata for metabolomics studies from the
+  [MetaboLights](https://www.ebi.ac.uk/metabolights/) repository,
 
 ---
 
