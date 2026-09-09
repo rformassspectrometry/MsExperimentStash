@@ -26,7 +26,8 @@ Description: The serialization mechanism of R allows to save and load R data
              MsExperiment objects. Data can be stashed in a variety of file
 	     formats and types, including HDF5 and JSON-based formats
              defined by the Bioconductor *alabaster* package. The package
-	     provides also functionality to read a full MS experiment from the
+	     provides also functionality to read a full MS experiment,
+	     including MS data and experimental metadata information, from the
 	     MetaboLights repository.
 Depends:
     R (>= 4.6.0),
@@ -54,8 +55,6 @@ Suggests:
     mzR,
     knitr,
     MsBackendMetaboLights
-Remotes:
-    RforMassSpectrometry/SpectraStash
 License: GPL-3
 Encoding: UTF-8
 VignetteBuilder: knitr
