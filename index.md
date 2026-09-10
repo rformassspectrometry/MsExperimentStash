@@ -1,7 +1,7 @@
 # MsExperimentStash
 
 *A safe way to store and preserve your `MsExperiment` objects in
-interoperable formats.*
+interoperable and portable formats.*
 
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
@@ -55,8 +55,8 @@ To install the packages along with all its dependencies:
 
 ### ⤵️ Retrieve data directly from MetaboLights (`MetaboLightsParam`)
 
-- Load data from a metabolomics study from the
-  [MetaboLights](https://www.ebi.ac.uk/metabolights/) repository
+- Load MS data and experimental metadata for metabolomics studies from
+  the [MetaboLights](https://www.ebi.ac.uk/metabolights/) repository,
 
 ------------------------------------------------------------------------
 

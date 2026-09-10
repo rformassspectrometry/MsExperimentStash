@@ -67,9 +67,10 @@
 re-imported using the <code><a href="https://rdrr.io/r/base/load.html" class="external-link">load()</a></code> function. This R-specific
 binary data format can however not be used easily in other programming
 languages preventing the exchange of R data objects between software.
-The <em>MsStash</em> package defines basic classes and generic methods
-to export and import mass spectrometry (MS) data objects in various
-storage formats aiming to facilitate data exchange between software. The
+The <em><a href="https://bioconductor.org/packages/3.23/MsStash" class="external-link">MsStash</a></em>
+package defines basic classes and generic methods to export and import
+mass spectrometry (MS) data objects in various storage formats aiming to
+facilitate data exchange between software. The
 <em>MsExperimentStash</em> package implements portable data storage
 formats (stashes) for data classes from the <em><a href="https://bioconductor.org/packages/3.23/MsExperiment" class="external-link">MsExperiment</a></em>
 package, including the <code>MsExperiment</code> object. Supported stash
@@ -91,16 +92,16 @@ To install <em>BiocManager</em> use
 <h2 id="a-stash-for-msexperiment-objects">A stash for <code>MsExperiment</code> objects<a class="anchor" aria-label="anchor" href="#a-stash-for-msexperiment-objects"></a>
 </h2>
 <p>MS data objects can be saved and restored through the
-<code><a href="https://rdrr.io/pkg/MsStash/man/saveMsObject.html" class="external-link">saveMsObject()</a></code> and <code><a href="https://rdrr.io/pkg/MsStash/man/saveMsObject.html" class="external-link">readMsObject()</a></code> functions
-into (or from) MS data stashes. Supported stash formats and their
-respective parameter objects are:</p>
+<code><a href="https://rdrr.io/pkg/MsStash/man/saveMsObject.html" class="external-link">saveMsObject()</a></code> and <code><a href="https://rdrr.io/pkg/MsStash/man/saveMsObject.html" class="external-link">readMsObject()</a></code> functions to
+(or from) MS data stashes. Supported stash formats and their respective
+parameter objects are:</p>
 <ul>
 <li>
 <code>AlabasterParam</code>: storage of MS data using Bioconductor’s
 <em><a href="https://bioconductor.org/packages/3.23/alabaster.base" class="external-link">alabaster.base</a></em>
 framework using files in HDF5 and JSON format. MS stashes in this format
-fully support the functions <code><a href="https://rdrr.io/pkg/alabaster.base/man/saveObject.html" class="external-link">saveObject()</a></code> and
-<code><a href="https://rdrr.io/pkg/alabaster.base/man/readObject.html" class="external-link">readObject()</a></code> from <em>alabaster.base</em>.</li>
+also fully support the <code><a href="https://rdrr.io/pkg/alabaster.base/man/saveObject.html" class="external-link">saveObject()</a></code> and
+<code><a href="https://rdrr.io/pkg/alabaster.base/man/readObject.html" class="external-link">readObject()</a></code> functions from <em>alabaster.base</em>.</li>
 <li>
 <code>PlainTextParam</code>: storage of data in (a custom) plain
 text file format. Note that this format currently does not support all
@@ -116,6 +117,8 @@ package.</p>
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/RforMassSpectrometry/MsExperiment" class="external-link">MsExperiment</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/RforMassSpectrometry/MsExperimentStash" class="external-link">MsExperimentStash</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rformassspectrometry.github.io/MsDataHub" class="external-link">MsDataHub</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#' Define the MS data files (provided by MsDataHub)</span></span>
 <span><span class="va">fls</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rformassspectrometry.github.io/MsDataHub/reference/sciex.html" class="external-link">X20171016_POOL_POS_1_105.134.mzML</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>         <span class="fu"><a href="https://rformassspectrometry.github.io/MsDataHub/reference/sciex.html" class="external-link">X20171016_POOL_POS_3_105.134.mzML</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
@@ -135,9 +138,9 @@ package.</p>
 <p>We next create a <code>SummarizedExperiment</code> and add that to
 the <code>MsExperiment</code> object. In a real-world use case this
 would contain quantitative feature abundances after e.g. preprocessing
-the data with <em>xcms</em>. For our example we fill the
-<code>SummarizedExperiment</code> with arbitrary information and random
-abundance values.</p>
+the data with the <em><a href="https://bioconductor.org/packages/3.23/xcms" class="external-link">xcms</a></em>
+package. For our example we fill the <code>SummarizedExperiment</code>
+with random abundance values.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#' Define a SummarizedExperiment with quantification data</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://bioconductor.org/packages/SummarizedExperiment" class="external-link">SummarizedExperiment</a></span><span class="op">)</span></span>
@@ -178,7 +181,7 @@ temporary folder.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://fs.r-lib.org" class="external-link">fs</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://fs.r-lib.org/reference/dir_tree.html" class="external-link">dir_tree</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #0000BB; font-weight: bold;">/tmp/RtmpNrUWpr/file1c7de5b2d05/mse_stash</span></span></span>
+<pre><code><span><span class="co">## <span style="color: #0000BB; font-weight: bold;">/tmp/Rtmpl5F05O/file1c35714e0e94/mse_stash</span></span></span>
 <span><span class="co">## ├── OBJECT</span></span>
 <span><span class="co">## ├── _environment.json</span></span>
 <span><span class="co">## ├── <span style="color: #0000BB; font-weight: bold;">experiment_files</span></span></span>
@@ -247,7 +250,8 @@ restore the stashed <code>MsExperiment</code> from such a
 <em>MsExperimentStash</em> using the <code><a href="https://rdrr.io/pkg/MsStash/man/saveMsObject.html" class="external-link">readMsObject()</a></code>
 function:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/MsStash/man/saveMsObject.html" class="external-link">readMsObject</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/MsExperiment/man/MsExperiment.html" class="external-link">MsExperiment</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">ap</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="co">#' Load the `MsExperiment` from the stash</span></span>
+<span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/MsStash/man/saveMsObject.html" class="external-link">readMsObject</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/MsExperiment/man/MsExperiment.html" class="external-link">MsExperiment</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">ap</span><span class="op">)</span></span>
 <span><span class="va">res</span></span></code></pre></div>
 <pre><code><span><span class="co">## Object of class MsExperiment </span></span>
 <span><span class="co">##  Spectra: MS1 (1862) </span></span>
@@ -258,7 +262,7 @@ function:</p>
 <p>For <code><a href="https://rdrr.io/pkg/MsStash/man/saveMsObject.html" class="external-link">readMsObject()</a></code> we need to specify the type of the
 object to restore from the stash with the first parameter of the
 function - in our case <code><a href="https://rdrr.io/pkg/MsExperiment/man/MsExperiment.html" class="external-link">MsExperiment()</a></code>.
-<em>MsExperimentStash</em> adds full support for
+<em>MsExperimentStash</em> provides full support for
 <em>alabaster</em>-based serialization formats to
 <code>MsExperiment</code> objects and we can therefore also use the
 <code><a href="https://rdrr.io/pkg/alabaster.base/man/readObject.html" class="external-link">readObject()</a></code> from the <em><a href="https://bioconductor.org/packages/3.23/alabaster.base" class="external-link">alabaster.base</a></em>
@@ -273,12 +277,13 @@ package to restore the object.</p>
 <span><span class="co">##  Experiment data: 2 sample(s)</span></span>
 <span><span class="co">##  Sample data links:</span></span>
 <span><span class="co">##   - spectra: 2 sample(s) to 1862 element(s).</span></span></code></pre>
-<p>Due to the modular structure of the <em>MsExperimentStash</em> is we
-can load also only a single component of the <code>MsExperiment</code>.
-We can for example restore the <code>Spectra</code> object from the
+<p>Due to the modular structure of the <em>MsExperimentStash</em> we can
+load also only a single component of the <code>MsExperiment</code>. We
+can for example restore the <code>Spectra</code> object from the
 <em>spectra</em> sub-folder:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/RforMassSpectrometry/Spectra" class="external-link">Spectra</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="co">#' Read the `Spectra` object with the MS data from the stash</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/RforMassSpectrometry/Spectra" class="external-link">Spectra</a></span><span class="op">)</span></span>
 <span><span class="va">sps</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/MsStash/man/saveMsObject.html" class="external-link">readMsObject</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/Spectra/man/Spectra.html" class="external-link">Spectra</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/MsStash/man/AlabasterParam.html" class="external-link">AlabasterParam</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">d</span>, <span class="st">"spectra"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">sps</span></span></code></pre></div>
 <pre><code><span><span class="co">## MSn data (Spectra) with 1862 spectra in a MsBackendMzR backend:</span></span>
@@ -298,12 +303,13 @@ We can for example restore the <code>Spectra</code> object from the
 <span><span class="co">##  ... 25 more variables/columns.</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## file(s):</span></span>
-<span><span class="co">## 1a452fae342c_7859</span></span>
-<span><span class="co">## 1a4516746842_7860</span></span></code></pre>
+<span><span class="co">## 19fb327a92e6_7859</span></span>
+<span><span class="co">## 19fb63be6e97_7860</span></span></code></pre>
 <p>Or only the <code>SummarizedExperiment</code> from the <em>qdata</em>
 sub-folder (using <em>alabaster.base</em> functions):</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/alabaster.base/man/readObject.html" class="external-link">readObject</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">d</span>, <span class="st">"qdata"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">#' Read the `SummarizedExperiment` from the stash</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/alabaster.base/man/readObject.html" class="external-link">readObject</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">d</span>, <span class="st">"qdata"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## class: SummarizedExperiment </span></span>
 <span><span class="co">## dim: 4 2 </span></span>
 <span><span class="co">## metadata(0):</span></span>
@@ -337,8 +343,8 @@ backend.</p>
 <span><span class="co">##  ... 34 more variables/columns.</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## file(s):</span></span>
-<span><span class="co">## 1a452fae342c_7859</span></span>
-<span><span class="co">## 1a4516746842_7860</span></span></code></pre>
+<span><span class="co">## 19fb327a92e6_7859</span></span>
+<span><span class="co">## 19fb63be6e97_7860</span></span></code></pre>
 <p>This type of backend keeps only the spectra metadata in memory while
 the mass peaks data (<em>m/z</em> and intensity values) are retrieved on
 demand from the original MS data files. By default, when saved to a
@@ -347,11 +353,11 @@ original MS data tiles are serialized to disk. If the MS data files are
 moved to another folder, or if the MsExperimentStash is moved to another
 computer, the data can not be fully restored (unless the path to the new
 location of the MS data files is provided with parameter
-<code>spectraPath</code> in <code><a href="https://rdrr.io/pkg/MsStash/man/saveMsObject.html" class="external-link">readMsObject()</a></code>). The stash
-functionality for most <code>Spectra</code> backend implementation
+<code>spectraPath</code> in the <code><a href="https://rdrr.io/pkg/MsStash/man/saveMsObject.html" class="external-link">readMsObject()</a></code> call). The
+stash functionality for most <code>Spectra</code> backend implementation
 supports however a parameter <code>consolidate</code> which, if set to
-<code>TRUE</code> will copy <strong>all</strong> required data
-<strong>into</strong> the stash generating hence a self-contained and
+<code>TRUE</code> will copy <strong>all</strong> data
+<strong>into</strong> the stash hence generating a self-contained and
 portable MsExperimentStash:</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#' Save the `MsExperiment` to a stash which includes the full data</span></span>
@@ -363,10 +369,11 @@ original MS data files (which have in this case random names without the
 expected <em>mzML</em> file ending, because the data was provided
 through the <em>MsDataHub</em> package):</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://fs.r-lib.org/reference/dir_tree.html" class="external-link">dir_tree</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">d</span>, <span class="st">"spectra"</span>, <span class="st">"backend"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #0000BB; font-weight: bold;">/tmp/RtmpNrUWpr/portable_stash/spectra/backend</span></span></span>
-<span><span class="co">## ├── 1a4516746842_7860</span></span>
-<span><span class="co">## ├── 1a452fae342c_7859</span></span>
+<code class="sourceCode R"><span><span class="co">#' Directory content of the spectra subfolder</span></span>
+<span><span class="fu"><a href="https://fs.r-lib.org/reference/dir_tree.html" class="external-link">dir_tree</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">d</span>, <span class="st">"spectra"</span>, <span class="st">"backend"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## <span style="color: #0000BB; font-weight: bold;">/tmp/Rtmpl5F05O/portable_stash/spectra/backend</span></span></span>
+<span><span class="co">## ├── 19fb327a92e6_7859</span></span>
+<span><span class="co">## ├── 19fb63be6e97_7860</span></span>
 <span><span class="co">## ├── OBJECT</span></span>
 <span><span class="co">## └── <span style="color: #0000BB; font-weight: bold;">spectra_data</span></span></span>
 <span><span class="co">##     ├── OBJECT</span></span>
@@ -389,7 +396,7 @@ files.</p>
 file format) within the stash.</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://fs.r-lib.org/reference/dir_tree.html" class="external-link">dir_tree</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">d</span>, <span class="st">"spectra"</span>, <span class="st">"backend"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #0000BB; font-weight: bold;">/tmp/RtmpNrUWpr/memory_stash/spectra/backend</span></span></span>
+<pre><code><span><span class="co">## <span style="color: #0000BB; font-weight: bold;">/tmp/Rtmpl5F05O/memory_stash/spectra/backend</span></span></span>
 <span><span class="co">## ├── OBJECT</span></span>
 <span><span class="co">## └── <span style="color: #0000BB; font-weight: bold;">backend</span></span></span>
 <span><span class="co">##     ├── OBJECT</span></span>
@@ -400,16 +407,18 @@ file format) within the stash.</p>
 <span><span class="co">##     └── <span style="color: #0000BB; font-weight: bold;">spectra_data</span></span></span>
 <span><span class="co">##         ├── OBJECT</span></span>
 <span><span class="co">##         └── basic_columns.h5</span></span></code></pre>
+<p>Again, because the full MS data is included in the stash, the size of
+the folder might be large.</p>
 </div>
 </div>
 <div class="section level2">
 <h2 id="retrieve-ms-experiments-from-metabolights">Retrieve MS experiments from MetaboLights<a class="anchor" aria-label="anchor" href="#retrieve-ms-experiments-from-metabolights"></a>
 </h2>
-<p>The <em>MetaboLights</em> database is one of the main repositories to
-deposit metabolomics data sets and experiments. With
-<code><a href="https://rdrr.io/pkg/MsStash/man/saveMsObject.html" class="external-link">readMsObject()</a></code> and a <code>MetaboLightsParam</code> it is
-possible to retrieve and load the data set from a MetaboLights study
-directly as an <code>MsExperiment</code> object. Sample and
+<p><em>MetaboLights</em> is one of the main repositories to deposit
+metabolomics data sets and experiments. With <code><a href="https://rdrr.io/pkg/MsStash/man/saveMsObject.html" class="external-link">readMsObject()</a></code>
+and a <code>MetaboLightsParam</code> it is possible to retrieve and load
+the data set from a MetaboLights study directly as an
+<code>MsExperiment</code> object from the repository into R. Sample and
 protocol/metadata information is loaded into the object’s
 <code><a href="https://rdrr.io/pkg/MsExperiment/man/MsExperiment.html" class="external-link">sampleData()</a></code> while the MS data files are downloaded and
 locally cached through the <em><a href="https://bioconductor.org/packages/3.23/MsBackendMetaboLights" class="external-link">MsBackendMetaboLights</a></em>
@@ -420,10 +429,10 @@ package. This data is available through the object’s
 specify which assay we want to load, and the <code>filePattern</code>
 parameter to indicate which assay files to load. Defining the assay name
 is required for studies that have more than one <em>assay</em> (e.g.,
-data measured in positive and polarity modes or using different
+data measured in positive and negative polarity modes or using different
 chromatographic setups). The <code>filePattern</code> on the other hand
-allows to restrict downloading to specific files; for our example we
-only load data files with a file ending <em>cdf</em>. It is recommended
+allows to restrict downloading only selected files; for our example we
+load only data files with a file ending <em>cdf</em>. It is recommended
 to adjust these settings according to your specific study.</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/RforMassSpectrometry/MsExperiment" class="external-link">MsExperiment</a></span><span class="op">)</span></span>
@@ -528,17 +537,17 @@ to adjust these settings according to your specific study.</p>
 <span><span class="co">## 4                                  1</span></span>
 <span><span class="co">## 5                                  2</span></span>
 <span><span class="co">## 6                                  3</span></span></code></pre>
-<p>We observe that a large number of columns are present. Several
-parameters are available in the <code><a href="https://rdrr.io/pkg/MsStash/man/saveMsObject.html" class="external-link">readMsObject()</a></code> function to
-simplify and restrict the content loaded into the
-<code>sampleData</code>. Setting <code>keepOntology = FALSE</code> will
-for example remove columns related to ontology terms, while
-<code>keepProtocol = FALSE</code> will remove columns related to
-protocol information. The <code>simplify = TRUE</code> option (the
-default) removes <code>NA</code>s and merges columns with different
-names but duplicate contents. You can set <code>simplify = FALSE</code>
-to retain all columns. Below, we load the object again, this time
-simplifying the <code>sampleData</code>:</p>
+<p>A large number of columns were loaded. Several parameters are
+available in the <code><a href="https://rdrr.io/pkg/MsStash/man/saveMsObject.html" class="external-link">readMsObject()</a></code> function to simplify and
+restrict the content loaded into the <code>sampleData</code>. Setting
+<code>keepOntology = FALSE</code> will for example remove columns
+related to ontology terms, while <code>keepProtocol = FALSE</code> will
+remove columns related to protocol information. The
+<code>simplify = TRUE</code> option (the default) removes columns
+containing only missing values (<code>NA</code>) and merges columns with
+different names but duplicate contents. Set to
+<code>simplify = FALSE</code> to retain all columns. Below, we load the
+object again, this time simplifying the <code>sampleData</code>:</p>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mse</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/MsStash/man/saveMsObject.html" class="external-link">readMsObject</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/MsExperiment/man/MsExperiment.html" class="external-link">MsExperiment</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">param</span>, keepOntology <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                    keepProtocol <span class="op">=</span> <span class="cn">FALSE</span>, simplify <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
@@ -656,7 +665,7 @@ information:</p>
 <span><span class="co">##  [61] Biostrings_2.81.9           ExperimentHub_3.3.2        </span></span>
 <span><span class="co">##  [63] pillar_1.11.1               BiocManager_1.30.27        </span></span>
 <span><span class="co">##  [65] filelock_1.0.3              ncdf4_1.24                 </span></span>
-<span><span class="co">##  [67] SpectraStash_0.99.1         hms_1.1.4                  </span></span>
+<span><span class="co">##  [67] SpectraStash_0.99.2         hms_1.1.4                  </span></span>
 <span><span class="co">##  [69] BiocVersion_3.23.1          alabaster.ranges_1.12.0    </span></span>
 <span><span class="co">##  [71] glue_1.8.1                  alabaster.matrix_1.12.0    </span></span>
 <span><span class="co">##  [73] lazyeval_0.2.3              tools_4.6.1                </span></span>
