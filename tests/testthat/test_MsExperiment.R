@@ -8,6 +8,7 @@ fls <- c(MsDataHub::X20171016_POOL_POS_1_105.134.mzML(),
 test_that("readMsObject,saveMsObject,MsExperiment,PlainTextParam works", {
     d <- file.path(tempdir(), "test_text")
 
+    ## Empty object
     a <- MsExperiment()
     p <- PlainTextParam(d)
     expect_no_error(saveMsObject(a, p))
@@ -18,14 +19,27 @@ test_that("readMsObject,saveMsObject,MsExperiment,PlainTextParam works", {
     unlink(d, recursive = TRUE)
 
     a <- readMsExperiment(fls, data.frame(name = c("A", "B"), index = 1:2))
+    a@experimentFiles <- MsExperimentFiles(a = "a.txt")
+    with_mocked_bindings(
+        ".is_spectra_stash_installed" = function() FALSE,
+        code = expect_error(saveMsObject(a, p),
+                            "'SpectraStash' for export")
+    )
+    unlink(d, recursive = TRUE)
     expect_no_error(saveMsObject(a, p, consolidate = TRUE))
     res <- readMsObject(a, p)
     expect_s4_class(res, "MsExperiment")
     expect_equal(sampleData(a), sampleData(res))
     expect_equal(a@sampleDataLinks, res@sampleDataLinks)
     expect_equal(rtime(spectra(a)), rtime(spectra(res)))
+    expect_equal(a@experimentFiles, res@experimentFiles)
     expect_equal(
         normalizePath(d), normalizePath(dataStorageBasePath(spectra(res))))
+    with_mocked_bindings(
+        ".is_spectra_stash_installed" = function() FALSE,
+        code = expect_error(readMsObject(MsExperiment(), p),
+                            "'SpectraStash' not available")
+    )
     unlink(d, recursive = TRUE)
 
     expect_error(readMsObject(MsExperiment(), PlainTextParam(tempdir())),
@@ -206,6 +220,17 @@ test_that(".warnings_text_format works", {
 
 test_that("readMsObject,MsExperiment,MetaboLightsParam works", {
     param <- MetaboLightsParam(mtblsId = "MTBLS39")
+
+    with_mocked_bindings(
+        ".is_ms_backend_metabo_lights_installed" = function() FALSE,
+        code = expect_error(readMsObject(MsExperiment(), param),
+                            "'MsBackendMetaboLights' is missing")
+    )
+    param@assayName <- "nono"
+    expect_error(readMsObject(MsExperiment(), param), "does not exist")
+    Sys.sleep(5)
+
+    param@assayName <- character()
     res <- readMsObject(MsExperiment(), param)
     expect_is(res, "MsExperiment")
     expect_is(res@sampleData, "DataFrame")
