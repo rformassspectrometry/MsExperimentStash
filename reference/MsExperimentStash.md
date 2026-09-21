@@ -250,7 +250,7 @@ saveMsObject(mse, AlabasterParam(d), consolidate = TRUE)
 ## Show the content of the stash folder
 library(fs)
 dir_tree(d)
-#> /tmp/RtmpoFznNS/ms_experiment_stash
+#> /tmp/Rtmp0o5FzI/ms_experiment_stash
 #> ├── OBJECT
 #> ├── _environment.json
 #> ├── experiment_files
@@ -280,8 +280,8 @@ dir_tree(d)
 #> └── spectra
 #>     ├── OBJECT
 #>     ├── backend
-#>     │   ├── 19fb327a92e6_7859
-#>     │   ├── 19fb63be6e97_7860
+#>     │   ├── 19d6236745cf_7860
+#>     │   ├── 19d64ba669d1_7859
 #>     │   ├── OBJECT
 #>     │   └── spectra_data
 #>     │       ├── OBJECT
@@ -313,8 +313,8 @@ sampleData(res)
 #> DataFrame with 2 rows and 3 columns
 #>                          name     index spectraOrigin
 #>                   <character> <integer>   <character>
-#> 19fb327a92e6_7859           A         1 /github/ho...
-#> 19fb63be6e97_7860           B         2 /github/ho...
+#> 19d64ba669d1_7859           A         1 /github/ho...
+#> 19d6236745cf_7860           B         2 /github/ho...
 
 spectra(res)
 #> MSn data (Spectra) with 1862 spectra in a MsBackendMzR backend:
@@ -334,6 +334,6 @@ spectra(res)
 #>  ... 25 more variables/columns.
 #> 
 #> file(s):
-#> 19fb327a92e6_7859
-#> 19fb63be6e97_7860
+#> 19d64ba669d1_7859
+#> 19d6236745cf_7860
 ```

@@ -28,7 +28,9 @@ and portability.
 
 To install the packages along with all its dependencies:
 
-[`install.packages`](https://rdrr.io/r/utils/install.packages.html)`(``"BiocManager"``)`` ``BiocManager``::`[`install`](https://bioconductor.github.io/BiocManager/reference/install.html)`(``"MsExperimentStash"``)`
+\
+[`install.packages`](https://rdrr.io/r/utils/install.packages.html)`(``"BiocManager"``)`\
+`BiocManager``::`[`install`](https://bioconductor.github.io/BiocManager/reference/install.html)`(``"MsExperimentStash"``)`
 
 ------------------------------------------------------------------------
 

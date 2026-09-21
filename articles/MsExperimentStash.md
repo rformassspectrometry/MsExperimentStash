@@ -27,6 +27,7 @@ The package can be installed with the *BiocManager* package. To install
 *BiocManager* use `install.packages("BiocManager")` and, after that,
 install *MsExperimentStash* including all dependencies with:
 
+\
 `BiocManager``::`[`install`](https://bioconductor.github.io/BiocManager/reference/install.html)`(``"MsExperimentStash"``)`
 
 ## A stash for `MsExperiment` objects
@@ -58,7 +59,23 @@ on the formats and implementation notes.
 As an example we create below a `MsExperiment` object with MS data two
 example MS data files from the *MsDataHub* package.
 
-[`library`](https://rdrr.io/r/base/library.html)`(`[`MsExperiment`](https://github.com/RforMassSpectrometry/MsExperiment)`)`` `[`library`](https://rdrr.io/r/base/library.html)`(`[`MsExperimentStash`](https://github.com/RforMassSpectrometry/MsExperimentStash)`)`` `[`library`](https://rdrr.io/r/base/library.html)`(`[`MsDataHub`](https://rformassspectrometry.github.io/MsDataHub)`)`` `` ``#' Define the MS data files (provided by MsDataHub)`` ``fls`` ``<-`` `[`c`](https://rdrr.io/r/base/c.html)`(`[`X20171016_POOL_POS_1_105.134.mzML`](https://rformassspectrometry.github.io/MsDataHub/reference/sciex.html)`(``)``,`` `` `[`X20171016_POOL_POS_3_105.134.mzML`](https://rformassspectrometry.github.io/MsDataHub/reference/sciex.html)`(``)``)`` `` ``#' Define a data.frame providing information on samples`` ``d`` ``<-`` `[`data.frame`](https://rdrr.io/r/base/data.frame.html)`(``name ``=`` `[`c`](https://rdrr.io/r/base/c.html)`(``"QC 1"``, ``"QC 2"``)``,`` `` sample_type ``=`` `[`c`](https://rdrr.io/r/base/c.html)`(``"QC POOL"``, ``"QC POOL"``)``,`` `` injection_index ``=`` `[`c`](https://rdrr.io/r/base/c.html)`(``1``, ``8``)``)`` `` ``#' Read the data as an MsExperiment object`` ``mse`` ``<-`` `[`readMsExperiment`](https://rdrr.io/pkg/MsExperiment/man/readMsExperiment.html)`(``fls``, sampleData ``=`` ``d``)`` ``mse`
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`MsExperiment`](https://github.com/RforMassSpectrometry/MsExperiment)`)`\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`MsExperimentStash`](https://github.com/RforMassSpectrometry/MsExperimentStash)`)`\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`MsDataHub`](https://rformassspectrometry.github.io/MsDataHub)`)`\
+\
+`#' Define the MS data files (provided by MsDataHub)`\
+`fls`` ``<-`` `[`c`](https://rdrr.io/r/base/c.html)`(`[`X20171016_POOL_POS_1_105.134.mzML`](https://rformassspectrometry.github.io/MsDataHub/reference/sciex.html)`(``)``,`\
+`         `[`X20171016_POOL_POS_3_105.134.mzML`](https://rformassspectrometry.github.io/MsDataHub/reference/sciex.html)`(``)``)`\
+\
+`#' Define a data.frame providing information on samples`\
+`d`` ``<-`` `[`data.frame`](https://rdrr.io/r/base/data.frame.html)`(``name ``=`` `[`c`](https://rdrr.io/r/base/c.html)`(``"QC 1"``, ``"QC 2"``)``,`\
+`                sample_type ``=`` `[`c`](https://rdrr.io/r/base/c.html)`(``"QC POOL"``, ``"QC POOL"``)``,`\
+`                injection_index ``=`` `[`c`](https://rdrr.io/r/base/c.html)`(``1``, ``8``)``)`\
+\
+`#' Read the data as an MsExperiment object`\
+`mse`` ``<-`` `[`readMsExperiment`](https://rdrr.io/pkg/MsExperiment/man/readMsExperiment.html)`(``fls``, sampleData ``=`` ``d``)`\
+`mse`
 
     ## Object of class MsExperiment 
     ##  Spectra: MS1 (1862) 
@@ -73,7 +90,21 @@ the *[xcms](https://bioconductor.org/packages/3.23/xcms)* package. For
 our example we fill the `SummarizedExperiment` with random abundance
 values.
 
-`#' Define a SummarizedExperiment with quantification data`` `[`library`](https://rdrr.io/r/base/library.html)`(`[`SummarizedExperiment`](https://bioconductor.org/packages/SummarizedExperiment)`)`` ``se`` ``<-`` `[`SummarizedExperiment`](https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html)`(`` `` `[`list`](https://rdrr.io/r/base/list.html)`(``raw ``=`` `[`matrix`](https://rdrr.io/r/base/matrix.html)`(`[`rnorm`](https://rdrr.io/r/stats/Normal.html)`(``8``)``, ncol ``=`` ``2``)``)``,`` `` rowData ``=`` `[`data.frame`](https://rdrr.io/r/base/data.frame.html)`(``feature_id ``=`` `[`c`](https://rdrr.io/r/base/c.html)`(``"F01"``, ``"F02"``, ``"F03"``, ``"F04"``)``,`` `` mzmed ``=`` `[`c`](https://rdrr.io/r/base/c.html)`(``127.2``, ``232.1``, ``321.2``, ``134.5``)``,`` `` rtmed ``=`` `[`c`](https://rdrr.io/r/base/c.html)`(``38.5``, ``127.3``, ``219.8``, ``64.3``)``)``,`` `` colData ``=`` ``d``)`` `[`rownames`](https://rdrr.io/r/base/colnames.html)`(``se``)`` ``<-`` `[`c`](https://rdrr.io/r/base/c.html)`(``"F01"``, ``"F02"``, ``"F03"``, ``"F04"``)`` `[`colnames`](https://rdrr.io/r/base/colnames.html)`(``se``)`` ``<-`` `[`c`](https://rdrr.io/r/base/c.html)`(``"QC_1"``, ``"QC_2"``)`` `` ``#' Add the SummarizedExperiment to the MsExperiment`` `[`qdata`](https://rdrr.io/pkg/MsExperiment/man/MsExperiment.html)`(``mse``)`` ``<-`` ``se`` ``mse`
+\
+`#' Define a SummarizedExperiment with quantification data`\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`SummarizedExperiment`](https://bioconductor.org/packages/SummarizedExperiment)`)`\
+`se`` ``<-`` `[`SummarizedExperiment`](https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html)`(`\
+`    `[`list`](https://rdrr.io/r/base/list.html)`(``raw ``=`` `[`matrix`](https://rdrr.io/r/base/matrix.html)`(`[`rnorm`](https://rdrr.io/r/stats/Normal.html)`(``8``)``, ncol ``=`` ``2``)``)``,`\
+`    rowData ``=`` `[`data.frame`](https://rdrr.io/r/base/data.frame.html)`(``feature_id ``=`` `[`c`](https://rdrr.io/r/base/c.html)`(``"F01"``, ``"F02"``, ``"F03"``, ``"F04"``)``,`\
+`                         mzmed ``=`` `[`c`](https://rdrr.io/r/base/c.html)`(``127.2``, ``232.1``, ``321.2``, ``134.5``)``,`\
+`                         rtmed ``=`` `[`c`](https://rdrr.io/r/base/c.html)`(``38.5``, ``127.3``, ``219.8``, ``64.3``)``)``,`\
+`    colData ``=`` ``d``)`\
+[`rownames`](https://rdrr.io/r/base/colnames.html)`(``se``)`` ``<-`` `[`c`](https://rdrr.io/r/base/c.html)`(``"F01"``, ``"F02"``, ``"F03"``, ``"F04"``)`\
+[`colnames`](https://rdrr.io/r/base/colnames.html)`(``se``)`` ``<-`` `[`c`](https://rdrr.io/r/base/c.html)`(``"QC_1"``, ``"QC_2"``)`\
+\
+`#' Add the SummarizedExperiment to the MsExperiment`\
+[`qdata`](https://rdrr.io/pkg/MsExperiment/man/MsExperiment.html)`(``mse``)`` ``<-`` ``se`\
+`mse`
 
     ## Object of class MsExperiment 
     ##  Spectra: MS1 (1862) 
@@ -89,13 +120,23 @@ function. We use an alabaster format and define the location of the
 stash with the `path` parameter of `AlabasterParam`. For the present
 example we save it to a temporary folder.
 
-`#' Define the location of the stash`` ``d`` ``<-`` `[`file.path`](https://rdrr.io/r/base/file.path.html)`(`[`tempfile`](https://rdrr.io/r/base/tempfile.html)`(``)``, ``"mse_stash"``)`` `` ``#' Configure the format and location`` ``ap`` ``<-`` `[`AlabasterParam`](https://rdrr.io/pkg/MsStash/man/AlabasterParam.html)`(``d``)`` `` ``` #' Save the `MsExperiment` object to the stash ``` `[`saveMsObject`](https://rdrr.io/pkg/MsStash/man/saveMsObject.html)`(``mse``, ``ap``)`
+\
+`#' Define the location of the stash`\
+`d`` ``<-`` `[`file.path`](https://rdrr.io/r/base/file.path.html)`(`[`tempfile`](https://rdrr.io/r/base/tempfile.html)`(``)``, ``"mse_stash"``)`\
+\
+`#' Configure the format and location`\
+`ap`` ``<-`` `[`AlabasterParam`](https://rdrr.io/pkg/MsStash/man/AlabasterParam.html)`(``d``)`\
+\
+`` #' Save the `MsExperiment` object to the stash ``\
+[`saveMsObject`](https://rdrr.io/pkg/MsStash/man/saveMsObject.html)`(``mse``, ``ap``)`
 
 The content of the stash folder is:
 
-[`library`](https://rdrr.io/r/base/library.html)`(`[`fs`](https://fs.r-lib.org)`)`` `[`dir_tree`](https://fs.r-lib.org/reference/dir_tree.html)`(``d``)`
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`fs`](https://fs.r-lib.org)`)`\
+[`dir_tree`](https://fs.r-lib.org/reference/dir_tree.html)`(``d``)`
 
-    ## /tmp/Rtmpl5F05O/file1c35714e0e94/mse_stash
+    ## /tmp/RtmpWFc4TB/file1c106b874254/mse_stash
     ## ├── OBJECT
     ## ├── _environment.json
     ## ├── experiment_files
@@ -165,7 +206,10 @@ from such a *MsExperimentStash* using the
 [`readMsObject()`](https://rdrr.io/pkg/MsStash/man/saveMsObject.html)
 function:
 
-`` #' Load the `MsExperiment` from the stash ``` ``res`` ``<-`` `[`readMsObject`](https://rdrr.io/pkg/MsStash/man/saveMsObject.html)`(`[`MsExperiment`](https://rdrr.io/pkg/MsExperiment/man/MsExperiment.html)`(``)``, ``ap``)`` ``res`
+\
+`` #' Load the `MsExperiment` from the stash ``\
+`res`` ``<-`` `[`readMsObject`](https://rdrr.io/pkg/MsStash/man/saveMsObject.html)`(`[`MsExperiment`](https://rdrr.io/pkg/MsExperiment/man/MsExperiment.html)`(``)``, ``ap``)`\
+`res`
 
     ## Object of class MsExperiment 
     ##  Spectra: MS1 (1862) 
@@ -187,7 +231,10 @@ from the
 *[alabaster.base](https://bioconductor.org/packages/3.23/alabaster.base)*
 package to restore the object.
 
-[`library`](https://rdrr.io/r/base/library.html)`(`[`alabaster.base`](https://github.com/ArtifactDB/alabaster.base)`)`` ``res`` ``<-`` `[`readObject`](https://rdrr.io/pkg/alabaster.base/man/readObject.html)`(``d``)`` ``res`
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`alabaster.base`](https://github.com/ArtifactDB/alabaster.base)`)`\
+`res`` ``<-`` `[`readObject`](https://rdrr.io/pkg/alabaster.base/man/readObject.html)`(``d``)`\
+`res`
 
     ## Object of class MsExperiment 
     ##  Spectra: MS1 (1862) 
@@ -200,7 +247,11 @@ Due to the modular structure of the *MsExperimentStash* we can load also
 only a single component of the `MsExperiment`. We can for example
 restore the `Spectra` object from the *spectra* sub-folder:
 
-`` #' Read the `Spectra` object with the MS data from the stash ``` `[`library`](https://rdrr.io/r/base/library.html)`(`[`Spectra`](https://github.com/RforMassSpectrometry/Spectra)`)`` ``sps`` ``<-`` `[`readMsObject`](https://rdrr.io/pkg/MsStash/man/saveMsObject.html)`(`[`Spectra`](https://rdrr.io/pkg/Spectra/man/Spectra.html)`(``)``, `[`AlabasterParam`](https://rdrr.io/pkg/MsStash/man/AlabasterParam.html)`(`[`file.path`](https://rdrr.io/r/base/file.path.html)`(``d``, ``"spectra"``)``)``)`` ``sps`
+\
+`` #' Read the `Spectra` object with the MS data from the stash ``\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`Spectra`](https://github.com/RforMassSpectrometry/Spectra)`)`\
+`sps`` ``<-`` `[`readMsObject`](https://rdrr.io/pkg/MsStash/man/saveMsObject.html)`(`[`Spectra`](https://rdrr.io/pkg/Spectra/man/Spectra.html)`(``)``, `[`AlabasterParam`](https://rdrr.io/pkg/MsStash/man/AlabasterParam.html)`(`[`file.path`](https://rdrr.io/r/base/file.path.html)`(``d``, ``"spectra"``)``)``)`\
+`sps`
 
     ## MSn data (Spectra) with 1862 spectra in a MsBackendMzR backend:
     ##        msLevel     rtime scanIndex
@@ -219,13 +270,15 @@ restore the `Spectra` object from the *spectra* sub-folder:
     ##  ... 25 more variables/columns.
     ## 
     ## file(s):
-    ## 19fb327a92e6_7859
-    ## 19fb63be6e97_7860
+    ## 19d64ba669d1_7859
+    ## 19d6236745cf_7860
 
 Or only the `SummarizedExperiment` from the *qdata* sub-folder (using
 *alabaster.base* functions):
 
-`` #' Read the `SummarizedExperiment` from the stash ``` `[`readObject`](https://rdrr.io/pkg/alabaster.base/man/readObject.html)`(`[`file.path`](https://rdrr.io/r/base/file.path.html)`(``d``, ``"qdata"``)``)`
+\
+`` #' Read the `SummarizedExperiment` from the stash ``\
+[`readObject`](https://rdrr.io/pkg/alabaster.base/man/readObject.html)`(`[`file.path`](https://rdrr.io/r/base/file.path.html)`(``d``, ``"qdata"``)``)`
 
     ## class: SummarizedExperiment 
     ## dim: 4 2 
@@ -241,6 +294,7 @@ Or only the `SummarizedExperiment` from the *qdata* sub-folder (using
 The MS data from our example `MsExperiment` is represented by a
 `Spectra` object using an `MsBackendMzR` backend.
 
+\
 [`spectra`](https://rdrr.io/pkg/ProtGenerics/man/protgenerics.html)`(``mse``)`
 
     ## MSn data (Spectra) with 1862 spectra in a MsBackendMzR backend:
@@ -260,8 +314,8 @@ The MS data from our example `MsExperiment` is represented by a
     ##  ... 34 more variables/columns.
     ## 
     ## file(s):
-    ## 19fb327a92e6_7859
-    ## 19fb63be6e97_7860
+    ## 19d64ba669d1_7859
+    ## 19d6236745cf_7860
 
 This type of backend keeps only the spectra metadata in memory while the
 mass peaks data (*m/z* and intensity values) are retrieved on demand
@@ -277,18 +331,24 @@ supports however a parameter `consolidate` which, if set to `TRUE` will
 copy **all** data **into** the stash hence generating a self-contained
 and portable MsExperimentStash:
 
-`` #' Save the `MsExperiment` to a stash which includes the full data ``` ``d`` ``<-`` `[`file.path`](https://rdrr.io/r/base/file.path.html)`(`[`tempdir`](https://rdrr.io/r/base/tempfile.html)`(``)``, ``"portable_stash"``)`` `` `[`saveMsObject`](https://rdrr.io/pkg/MsStash/man/saveMsObject.html)`(``mse``, `[`AlabasterParam`](https://rdrr.io/pkg/MsStash/man/AlabasterParam.html)`(``d``)``, consolidate ``=`` ``TRUE``)`
+\
+`` #' Save the `MsExperiment` to a stash which includes the full data ``\
+`d`` ``<-`` `[`file.path`](https://rdrr.io/r/base/file.path.html)`(`[`tempdir`](https://rdrr.io/r/base/tempfile.html)`(``)``, ``"portable_stash"``)`\
+\
+[`saveMsObject`](https://rdrr.io/pkg/MsStash/man/saveMsObject.html)`(``mse``, `[`AlabasterParam`](https://rdrr.io/pkg/MsStash/man/AlabasterParam.html)`(``d``)``, consolidate ``=`` ``TRUE``)`
 
 The SpectraStash within the MsExperimentStash contains now also the
 original MS data files (which have in this case random names without the
 expected *mzML* file ending, because the data was provided through the
 *MsDataHub* package):
 
-`#' Directory content of the spectra subfolder`` `[`dir_tree`](https://fs.r-lib.org/reference/dir_tree.html)`(`[`file.path`](https://rdrr.io/r/base/file.path.html)`(``d``, ``"spectra"``, ``"backend"``)``)`
+\
+`#' Directory content of the spectra subfolder`\
+[`dir_tree`](https://fs.r-lib.org/reference/dir_tree.html)`(`[`file.path`](https://rdrr.io/r/base/file.path.html)`(``d``, ``"spectra"``, ``"backend"``)``)`
 
-    ## /tmp/Rtmpl5F05O/portable_stash/spectra/backend
-    ## ├── 19fb327a92e6_7859
-    ## ├── 19fb63be6e97_7860
+    ## /tmp/RtmpWFc4TB/portable_stash/spectra/backend
+    ## ├── 19d6236745cf_7860
+    ## ├── 19d64ba669d1_7859
     ## ├── OBJECT
     ## └── spectra_data
     ##     ├── OBJECT
@@ -302,14 +362,22 @@ Alternatively, we could also change the backend of the `Spectra` within
 the `MsExperiment` to an *in-memory* backend and create a stash from
 that object.
 
-`#' Change the Spectra backend to MsBackendMemory: load all MS data`` ``#' into memory`` `[`spectra`](https://rdrr.io/pkg/ProtGenerics/man/protgenerics.html)`(``mse``)`` ``<-`` `[`setBackend`](https://rdrr.io/pkg/ProtGenerics/man/backendInitialize.html)`(`[`spectra`](https://rdrr.io/pkg/ProtGenerics/man/protgenerics.html)`(``mse``)``, `[`MsBackendMemory`](https://rdrr.io/pkg/Spectra/man/MsBackend.html)`(``)``)`` `` ``#' Save the MsExperiment to a stash`` ``d`` ``<-`` `[`file.path`](https://rdrr.io/r/base/file.path.html)`(`[`tempdir`](https://rdrr.io/r/base/tempfile.html)`(``)``, ``"memory_stash"``)`` `[`saveMsObject`](https://rdrr.io/pkg/MsStash/man/saveMsObject.html)`(``mse``, `[`AlabasterParam`](https://rdrr.io/pkg/MsStash/man/AlabasterParam.html)`(``d``)``)`
+\
+`#' Change the Spectra backend to MsBackendMemory: load all MS data`\
+`#' into memory`\
+[`spectra`](https://rdrr.io/pkg/ProtGenerics/man/protgenerics.html)`(``mse``)`` ``<-`` `[`setBackend`](https://rdrr.io/pkg/ProtGenerics/man/backendInitialize.html)`(`[`spectra`](https://rdrr.io/pkg/ProtGenerics/man/protgenerics.html)`(``mse``)``, `[`MsBackendMemory`](https://rdrr.io/pkg/Spectra/man/MsBackend.html)`(``)``)`\
+\
+`#' Save the MsExperiment to a stash`\
+`d`` ``<-`` `[`file.path`](https://rdrr.io/r/base/file.path.html)`(`[`tempdir`](https://rdrr.io/r/base/tempfile.html)`(``)``, ``"memory_stash"``)`\
+[`saveMsObject`](https://rdrr.io/pkg/MsStash/man/saveMsObject.html)`(``mse``, `[`AlabasterParam`](https://rdrr.io/pkg/MsStash/man/AlabasterParam.html)`(``d``)``)`
 
 The full MS data is now stored in a *peaks.h5* file (in HDF5 file
 format) within the stash.
 
-[`dir_tree`](https://fs.r-lib.org/reference/dir_tree.html)`(`[`file.path`](https://rdrr.io/r/base/file.path.html)`(``d``, ``"spectra"``, ``"backend"``)``)`
+\
+[`dir_tree`](https://fs.r-lib.org/reference/dir_tree.html)`(`[`file.path`](https://rdrr.io/r/base/file.path.html)`(``d``, ``"spectra"``, ``"backend"``)``)`
 
-    ## /tmp/Rtmpl5F05O/memory_stash/spectra/backend
+    ## /tmp/RtmpWFc4TB/memory_stash/spectra/backend
     ## ├── OBJECT
     ## └── backend
     ##     ├── OBJECT
@@ -350,12 +418,22 @@ the other hand allows to restrict downloading only selected files; for
 our example we load only data files with a file ending *cdf*. It is
 recommended to adjust these settings according to your specific study.
 
-[`library`](https://rdrr.io/r/base/library.html)`(`[`MsExperiment`](https://github.com/RforMassSpectrometry/MsExperiment)`)`` ``#' Prepare parameter`` ``param`` ``<-`` `[`MetaboLightsParam`](https://rformassspectrometry.github.io/MsExperimentStash/reference/MetaboLightsParam.md)`(`` `` mtblsId ``=`` ``"MTBLS575"``,`` `` assayName ``=`` `[`paste0`](https://rdrr.io/r/base/paste.html)`(``"a_MTBLS575_POS_INFEST_CTRL_mass_spectrometry.txt"``)``,`` `` filePattern ``=`` ``"cdf$"``)`` `` ``#' Load MsExperiment object`` ``mse`` ``<-`` `[`readMsObject`](https://rdrr.io/pkg/MsStash/man/saveMsObject.html)`(`[`MsExperiment`](https://rdrr.io/pkg/MsExperiment/man/MsExperiment.html)`(``)``, ``param``)`
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`MsExperiment`](https://github.com/RforMassSpectrometry/MsExperiment)`)`\
+`#' Prepare parameter`\
+`param`` ``<-`` `[`MetaboLightsParam`](https://rformassspectrometry.github.io/MsExperimentStash/reference/MetaboLightsParam.md)`(`\
+`    mtblsId ``=`` ``"MTBLS575"``,`\
+`    assayName ``=`` `[`paste0`](https://rdrr.io/r/base/paste.html)`(``"a_MTBLS575_POS_INFEST_CTRL_mass_spectrometry.txt"``)``,`\
+`    filePattern ``=`` ``"cdf$"``)`\
+\
+`#' Load MsExperiment object`\
+`mse`` ``<-`` `[`readMsObject`](https://rdrr.io/pkg/MsStash/man/saveMsObject.html)`(`[`MsExperiment`](https://rdrr.io/pkg/MsExperiment/man/MsExperiment.html)`(``)``, ``param``)`
 
 Next, we examine the
 [`sampleData()`](https://rdrr.io/pkg/MsExperiment/man/MsExperiment.html)
 of our `mse` object:
 
+\
 [`sampleData`](https://rdrr.io/pkg/MsExperiment/man/MsExperiment.html)`(``mse``)`
 
     ## DataFrame with 6 rows and 30 columns
@@ -460,11 +538,14 @@ option (the default) removes columns containing only missing values
 Set to `simplify = FALSE` to retain all columns. Below, we load the
 object again, this time simplifying the `sampleData`:
 
-`mse`` ``<-`` `[`readMsObject`](https://rdrr.io/pkg/MsStash/man/saveMsObject.html)`(`[`MsExperiment`](https://rdrr.io/pkg/MsExperiment/man/MsExperiment.html)`(``)``, ``param``, keepOntology ``=`` ``FALSE``,`` `` keepProtocol ``=`` ``FALSE``, simplify ``=`` ``TRUE``)`
+\
+`mse`` ``<-`` `[`readMsObject`](https://rdrr.io/pkg/MsStash/man/saveMsObject.html)`(`[`MsExperiment`](https://rdrr.io/pkg/MsExperiment/man/MsExperiment.html)`(``)``, ``param``, keepOntology ``=`` ``FALSE``,`\
+`                    keepProtocol ``=`` ``FALSE``, simplify ``=`` ``TRUE``)`
 
 Note that the MS data files were loaded from the local cache and not
 downloaded again. Now, if we examine the `sampleData` information:
 
+\
 [`sampleData`](https://rdrr.io/pkg/MsExperiment/man/MsExperiment.html)`(``mse``)`
 
     ## DataFrame with 6 rows and 10 columns
@@ -505,6 +586,7 @@ We can see that it is much simpler.
 
 ## Session information
 
+\
 [`sessionInfo`](https://rdrr.io/r/utils/sessionInfo.html)`(``)`
 
     ## R version 4.6.1 (2026-06-24)
@@ -531,11 +613,11 @@ We can see that it is much simpler.
     ## [8] base     
     ## 
     ## other attached packages:
-    ##  [1] Spectra_1.23.4              BiocParallel_1.47.0        
+    ##  [1] Spectra_1.23.5              BiocParallel_1.47.0        
     ##  [3] alabaster.base_1.13.4       fs_2.1.0                   
     ##  [5] SummarizedExperiment_1.42.0 Biobase_2.73.2             
     ##  [7] GenomicRanges_1.64.0        Seqinfo_1.3.2              
-    ##  [9] IRanges_2.47.5              S4Vectors_0.51.9           
+    ##  [9] IRanges_2.47.5              S4Vectors_0.51.10          
     ## [11] BiocGenerics_0.59.12        generics_0.1.4             
     ## [13] MatrixGenerics_1.25.0       matrixStats_1.5.0          
     ## [15] MsDataHub_1.13.1            MsExperimentStash_0.99.0   
@@ -555,7 +637,7 @@ We can see that it is much simpler.
     ##  [19] dbplyr_2.6.0                XVector_0.53.0             
     ##  [21] rmarkdown_2.32              ragg_1.5.2                 
     ##  [23] purrr_1.2.2                 bit_4.6.0                  
-    ##  [25] xfun_0.60                   MultiAssayExperiment_1.38.0
+    ##  [25] xfun_0.61                   MultiAssayExperiment_1.38.0
     ##  [27] cachem_1.1.0                jsonlite_2.0.0             
     ##  [29] progress_1.2.3              blob_1.3.0                 
     ##  [31] rhdf5filters_1.25.4         DelayedArray_0.39.6        
@@ -582,7 +664,7 @@ We can see that it is much simpler.
     ##  [73] lazyeval_0.2.3              tools_4.6.1                
     ##  [75] AnnotationHub_4.3.2         data.table_1.18.6.1        
     ##  [77] mzR_2.46.0                  QFeatures_1.22.0           
-    ##  [79] rhdf5_2.57.12               grid_4.6.1                 
+    ##  [79] rhdf5_2.57.17               grid_4.6.1                 
     ##  [81] tidyr_1.3.2                 MsCoreUtils_1.25.4         
     ##  [83] AnnotationDbi_1.75.2        HDF5Array_1.40.0           
     ##  [85] cli_3.6.6                   rappdirs_0.3.4             
