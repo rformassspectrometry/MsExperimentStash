@@ -1,5 +1,9 @@
 # *MsExperimentStash* 0.99
 
+## Changes in version 0.99.1
+
+- Add `MwbParam` to support importing an experiment from Metabolomics Workbench.
+
 ## Changes in version 0.99.0
 
 - Prepare and clean package for submission to Bioconductor.

@@ -259,3 +259,41 @@ test_that("MetaboLightsParam interactive session works", {
     expect_true(nrow(result@sampleData) == 6)
     expect_true(ncol(result@sampleData) == 30)
 })
+
+test_that("readMsObject,MsExperiment,MwbParam works", {
+    param <- MwbParam(mwbId = "ST002115", analysisId = "AN003513",
+                        filePattern = "01_RP.mzXML")
+
+    with_mocked_bindings(
+        ".is_ms_backend_mwb_installed" = function() FALSE,
+        code = expect_error(readMsObject(MsExperiment(), param),
+                            "'MsBackendMetabolomicsWorkbench' is missing")
+    )
+
+    param@analysisId <- "nono"
+    expect_error(readMsObject(MsExperiment(), param), "does not exist")
+    Sys.sleep(5)
+
+    param@analysisId <- "AN003513"
+    res <- readMsObject(MsExperiment(), param)
+    expect_is(res, "MsExperiment")
+    expect_is(res@sampleData, "DataFrame")
+
+    ## Test simplify flag removes columns with NAs and duplicated columns
+    expect_true(all(colSums(is.na(res@sampleData)) != nrow(res@sampleData)))
+    expect_true(any(duplicated(as.list(res@sampleData))) == FALSE)
+})
+
+test_that("MwbParam interactive session works", {
+    ## Testing interactive sesh
+    mock_param <- MwbParam(mwbId = "ST002115", filePattern = "01_RP.mzXML")
+    menu <- NULL
+    with_mocked_bindings(
+        menu = function(choices, title = NULL) { 1 },
+        {
+            result <- readMsObject(MsExperiment(), mock_param)
+        }
+    )
+    expect_true(nrow(result@sampleData) == 12)
+    expect_true(ncol(result@sampleData) == 17)
+})

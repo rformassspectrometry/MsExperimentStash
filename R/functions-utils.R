@@ -59,3 +59,11 @@
 .is_ms_backend_metabo_lights_installed <- function() {
     requireNamespace("MsBackendMetaboLights", quietly = TRUE)
 }
+
+#' Used in
+#' - *R/MsExperiment.R*: `readMsObject,MsExperiment,MWBParam`
+#'
+#' @noRd
+.is_ms_backend_mwb_installed <- function() {
+    requireNamespace("MsBackendMetabolomicsWorkbench", quietly = TRUE)
+}

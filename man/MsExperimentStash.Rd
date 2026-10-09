@@ -127,6 +127,16 @@ from the \href{https://www.ebi.ac.uk/metabolights/}{MetaboLights} repository.
 See \link{MetaboLightsParam} for more information.
 }
 
+\section{Retrieve MS data from \emph{Metabolomics Workbench}}{
+
+
+In addition to the MsExperimentStash formats for storage of \code{MsExperiment}
+objects, it is possible to load data from a metabolomics study directly
+from the \href{https://metabolomicsworkbench.org/}{Metabolomics Workbench}
+repository.
+See \link{MwbParam} for more information.
+}
+
 \examples{
 
 ## Example MS data files
@@ -162,6 +172,9 @@ spectra(res)
 \seealso{
 \link{MetaboLightsParam} for loading an \code{MsExperiment} from the
 MetaboLights public repository.
+
+\link{MwbParam} for loading an \code{MsExperiment} from the Metabolomics
+Workbench public repository.
 }
 \author{
 Philippine Louail, Johannes Rainer
