@@ -1,6 +1,6 @@
 Package: MsExperimentStash
 Title: Save and restore MsExperiment objects in interoperable file formats
-Version: 0.99.0
+Version: 0.99.1
 Authors@R:
     c(person(given = "Johannes", family = "Rainer",
              email = "Johannes.Rainer@eurac.edu",
@@ -39,7 +39,8 @@ Imports:
     S4Vectors,
     Spectra,
     MsCoreUtils,
-    ProtGenerics
+    ProtGenerics,
+    jsonlite
 Suggests:
     BiocStyle,
     testthat,
@@ -54,7 +55,8 @@ Suggests:
     QFeatures,
     mzR,
     knitr,
-    MsBackendMetaboLights
+    MsBackendMetaboLights,
+    MsBackendMetabolomicsWorkbench
 License: GPL-3
 Encoding: UTF-8
 VignetteBuilder: knitr
