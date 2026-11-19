@@ -57,6 +57,7 @@ readMsObject(object, param, ...)
 
   For
   [`saveObject()`](https://rdrr.io/pkg/alabaster.base/man/saveObject.html):
+  `character(1)` with the path to the folder for the stash.
 
 ## Value
 
@@ -71,8 +72,6 @@ Overwriting an existing *MsExperimentStash* is not allowed.
 
 Serializing `MsExperiment` objects containing a `QFeatures` object is
 currently not supported.
-
-The *plain text file-based* stash is currently not supported.
 
 ## *alabaster*-based format, `AlabasterParam`
 
@@ -229,6 +228,7 @@ library(Spectra)
 #> Loading required package: BiocParallel
 library(MsExperiment)
 library(MsDataHub)
+#> Warning: replacing previous import ‘BiocGenerics::version’ by ‘BiocManager::version’ when loading ‘AnnotationHub’
 fls <- c(X20171016_POOL_POS_1_105.134.mzML(),
     X20171016_POOL_POS_3_105.134.mzML())
 #> see ?MsDataHub and browseVignettes('MsDataHub') for documentation
@@ -250,7 +250,7 @@ saveMsObject(mse, AlabasterParam(d), consolidate = TRUE)
 ## Show the content of the stash folder
 library(fs)
 dir_tree(d)
-#> /tmp/Rtmp0o5FzI/ms_experiment_stash
+#> /tmp/RtmpqNytXT/ms_experiment_stash
 #> ├── OBJECT
 #> ├── _environment.json
 #> ├── experiment_files
@@ -280,8 +280,8 @@ dir_tree(d)
 #> └── spectra
 #>     ├── OBJECT
 #>     ├── backend
-#>     │   ├── 19d6236745cf_7860
-#>     │   ├── 19d64ba669d1_7859
+#>     │   ├── 1b6c10b11184_7860
+#>     │   ├── 1b6c4b4cd248_7859
 #>     │   ├── OBJECT
 #>     │   └── spectra_data
 #>     │       ├── OBJECT
@@ -313,8 +313,8 @@ sampleData(res)
 #> DataFrame with 2 rows and 3 columns
 #>                          name     index spectraOrigin
 #>                   <character> <integer>   <character>
-#> 19d64ba669d1_7859           A         1 /github/ho...
-#> 19d6236745cf_7860           B         2 /github/ho...
+#> 1b6c4b4cd248_7859           A         1 /github/ho...
+#> 1b6c10b11184_7860           B         2 /github/ho...
 
 spectra(res)
 #> MSn data (Spectra) with 1862 spectra in a MsBackendMzR backend:
@@ -334,6 +334,29 @@ spectra(res)
 #>  ... 25 more variables/columns.
 #> 
 #> file(s):
-#> 19d64ba669d1_7859
-#> 19d6236745cf_7860
+#> 1b6c4b4cd248_7859
+#> 1b6c10b11184_7860
+
+## Save the MsExperiment to a stash in plain text format.
+d <- file.path(tempdir(), "ms_experiment_text_stash")
+saveMsObject(mse, PlainTextParam(d))
+
+## Show the content of the stash folder
+dir_tree(d)
+#> /tmp/RtmpqNytXT/ms_experiment_text_stash
+#> ├── ms_backend_spectra_data.txt
+#> ├── ms_experiment_link_mcols.txt
+#> ├── ms_experiment_sample_data.txt
+#> ├── ms_experiment_sample_data_links_spectra.txt
+#> ├── spectra_processing_queue.json
+#> └── spectra_slots.txt
+
+## Restore the object
+res <- readMsObject(MsExperiment(), PlainTextParam(d))
+res
+#> Object of class MsExperiment 
+#>  Spectra: MS1 (1862) 
+#>  Experiment data: 2 sample(s)
+#>  Sample data links:
+#>   - spectra: 2 sample(s) to 1862 element(s).
 ```

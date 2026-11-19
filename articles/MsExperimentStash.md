@@ -17,9 +17,8 @@ classes from the
 *[MsExperiment](https://bioconductor.org/packages/3.23/MsExperiment)*
 package, including the `MsExperiment` object. Supported stash formats
 are, next to storage in simple plain text files, also Bioconductor’s
-*alabaster* format defined in the
-*[alabaster.base](https://bioconductor.org/packages/3.23/alabaster.base)*
-and related packages.
+*alabaster* format defined in the `r Biocpkg("alabaster.base")` and
+related packages.
 
 ## Installation
 
@@ -50,7 +49,9 @@ their respective parameter objects are:
 - `PlainTextParam`: storage of data in (a custom) plain text file
   format. Note that this format currently does not support all data
   structures potentially present in an `MsExperiment` and hence the
-  alabaster format is preferred.
+  alabaster format is preferred. For examples on this format see the
+  [`?MsExperiment`](https://rdrr.io/pkg/MsExperiment/man/MsExperiment.html)
+  documentation.
 
 See also the vignette from the
 *[MsStash](https://bioconductor.org/packages/3.23/MsStash)* for details
@@ -62,7 +63,11 @@ example MS data files from the *MsDataHub* package.
 \
 [`library`](https://rdrr.io/r/base/library.html)`(`[`MsExperiment`](https://github.com/RforMassSpectrometry/MsExperiment)`)`\
 [`library`](https://rdrr.io/r/base/library.html)`(`[`MsExperimentStash`](https://github.com/RforMassSpectrometry/MsExperimentStash)`)`\
-[`library`](https://rdrr.io/r/base/library.html)`(`[`MsDataHub`](https://rformassspectrometry.github.io/MsDataHub)`)`\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`MsDataHub`](https://rformassspectrometry.github.io/MsDataHub)`)`
+
+    ## Warning: replacing previous import 'BiocGenerics::version' by
+    ## 'BiocManager::version' when loading 'AnnotationHub'
+
 \
 `#' Define the MS data files (provided by MsDataHub)`\
 `fls`` ``<-`` `[`c`](https://rdrr.io/r/base/c.html)`(`[`X20171016_POOL_POS_1_105.134.mzML`](https://rformassspectrometry.github.io/MsDataHub/reference/sciex.html)`(``)``,`\
@@ -136,7 +141,7 @@ The content of the stash folder is:
 [`library`](https://rdrr.io/r/base/library.html)`(`[`fs`](https://fs.r-lib.org)`)`\
 [`dir_tree`](https://fs.r-lib.org/reference/dir_tree.html)`(``d``)`
 
-    ## /tmp/RtmpWFc4TB/file1c106b874254/mse_stash
+    ## /tmp/RtmpClTlnQ/file1db12e6bfaef/mse_stash
     ## ├── OBJECT
     ## ├── _environment.json
     ## ├── experiment_files
@@ -270,8 +275,8 @@ restore the `Spectra` object from the *spectra* sub-folder:
     ##  ... 25 more variables/columns.
     ## 
     ## file(s):
-    ## 19d64ba669d1_7859
-    ## 19d6236745cf_7860
+    ## 1b6c4b4cd248_7859
+    ## 1b6c10b11184_7860
 
 Or only the `SummarizedExperiment` from the *qdata* sub-folder (using
 *alabaster.base* functions):
@@ -314,8 +319,8 @@ The MS data from our example `MsExperiment` is represented by a
     ##  ... 34 more variables/columns.
     ## 
     ## file(s):
-    ## 19d64ba669d1_7859
-    ## 19d6236745cf_7860
+    ## 1b6c4b4cd248_7859
+    ## 1b6c10b11184_7860
 
 This type of backend keeps only the spectra metadata in memory while the
 mass peaks data (*m/z* and intensity values) are retrieved on demand
@@ -346,9 +351,9 @@ expected *mzML* file ending, because the data was provided through the
 `#' Directory content of the spectra subfolder`\
 [`dir_tree`](https://fs.r-lib.org/reference/dir_tree.html)`(`[`file.path`](https://rdrr.io/r/base/file.path.html)`(``d``, ``"spectra"``, ``"backend"``)``)`
 
-    ## /tmp/RtmpWFc4TB/portable_stash/spectra/backend
-    ## ├── 19d6236745cf_7860
-    ## ├── 19d64ba669d1_7859
+    ## /tmp/RtmpClTlnQ/portable_stash/spectra/backend
+    ## ├── 1b6c10b11184_7860
+    ## ├── 1b6c4b4cd248_7859
     ## ├── OBJECT
     ## └── spectra_data
     ##     ├── OBJECT
@@ -377,7 +382,7 @@ format) within the stash.
 \
 [`dir_tree`](https://fs.r-lib.org/reference/dir_tree.html)`(`[`file.path`](https://rdrr.io/r/base/file.path.html)`(``d``, ``"spectra"``, ``"backend"``)``)`
 
-    ## /tmp/RtmpWFc4TB/memory_stash/spectra/backend
+    ## /tmp/RtmpClTlnQ/memory_stash/spectra/backend
     ## ├── OBJECT
     ## └── backend
     ##     ├── OBJECT
@@ -591,7 +596,7 @@ We can see that it is much simpler.
 
     ## R version 4.6.1 (2026-06-24)
     ## Platform: x86_64-pc-linux-gnu
-    ## Running under: Ubuntu 24.04.4 LTS
+    ## Running under: Ubuntu 24.04.5 LTS
     ## 
     ## Matrix products: default
     ## BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 
@@ -613,14 +618,14 @@ We can see that it is much simpler.
     ## [8] base     
     ## 
     ## other attached packages:
-    ##  [1] Spectra_1.23.5              BiocParallel_1.47.0        
-    ##  [3] alabaster.base_1.13.4       fs_2.1.0                   
+    ##  [1] Spectra_1.23.7              BiocParallel_1.47.0        
+    ##  [3] alabaster.base_1.13.5       fs_2.1.0                   
     ##  [5] SummarizedExperiment_1.42.0 Biobase_2.73.2             
     ##  [7] GenomicRanges_1.64.0        Seqinfo_1.3.2              
     ##  [9] IRanges_2.47.5              S4Vectors_0.51.10          
-    ## [11] BiocGenerics_0.59.12        generics_0.1.4             
+    ## [11] BiocGenerics_0.59.13        generics_0.1.4             
     ## [13] MatrixGenerics_1.25.0       matrixStats_1.5.0          
-    ## [15] MsDataHub_1.13.1            MsExperimentStash_0.99.0   
+    ## [15] MsDataHub_1.13.4            MsExperimentStash_0.99.1   
     ## [17] MsStash_0.99.0              MsExperiment_1.14.0        
     ## [19] ProtGenerics_1.45.0         BiocStyle_2.40.0           
     ## 
@@ -633,45 +638,45 @@ We can see that it is much simpler.
     ##  [11] systemfonts_1.3.2           vctrs_0.7.3                
     ##  [13] reshape2_1.4.5              stringr_1.6.0              
     ##  [15] crayon_1.5.3                pkgconfig_2.0.3            
-    ##  [17] MetaboCoreUtils_1.21.1      fastmap_1.2.0              
+    ##  [17] MetaboCoreUtils_1.21.2      fastmap_1.2.0              
     ##  [19] dbplyr_2.6.0                XVector_0.53.0             
     ##  [21] rmarkdown_2.32              ragg_1.5.2                 
     ##  [23] purrr_1.2.2                 bit_4.6.0                  
-    ##  [25] xfun_0.61                   MultiAssayExperiment_1.38.0
+    ##  [25] xfun_0.62                   MultiAssayExperiment_1.38.0
     ##  [27] cachem_1.1.0                jsonlite_2.0.0             
     ##  [29] progress_1.2.3              blob_1.3.0                 
-    ##  [31] rhdf5filters_1.25.4         DelayedArray_0.39.6        
+    ##  [31] rhdf5filters_1.25.5         DelayedArray_0.39.8        
     ##  [33] Rhdf5lib_2.1.0              prettyunits_1.2.0          
     ##  [35] parallel_4.6.1              cluster_2.1.8.3            
     ##  [37] R6_2.6.1                    bslib_0.12.0               
     ##  [39] stringi_1.8.9               jquerylib_0.1.4            
     ##  [41] Rcpp_1.1.2                  bookdown_0.48              
     ##  [43] knitr_1.52                  BiocBaseUtils_1.15.1       
-    ##  [45] Matrix_1.7-6                igraph_2.3.3               
+    ##  [45] Matrix_1.7-6                igraph_2.3.4               
     ##  [47] tidyselect_1.2.1            abind_1.4-8                
     ##  [49] yaml_2.3.12                 codetools_0.2-20           
-    ##  [51] curl_8.0.0                  lattice_0.23-1             
+    ##  [51] curl_8.1.0                  lattice_0.23-1             
     ##  [53] tibble_3.3.1                plyr_1.8.9                 
     ##  [55] withr_3.0.3                 KEGGREST_1.53.6            
     ##  [57] evaluate_1.0.5              desc_1.4.3                 
-    ##  [59] BiocFileCache_3.3.0         alabaster.schemas_1.13.0   
+    ##  [59] BiocFileCache_3.3.3         alabaster.schemas_1.13.0   
     ##  [61] Biostrings_2.81.9           ExperimentHub_3.3.2        
     ##  [63] pillar_1.11.1               BiocManager_1.30.27        
     ##  [65] filelock_1.0.3              ncdf4_1.24                 
-    ##  [67] SpectraStash_0.99.2         hms_1.1.4                  
+    ##  [67] SpectraStash_0.99.7         hms_1.1.4                  
     ##  [69] BiocVersion_3.23.1          alabaster.ranges_1.12.0    
     ##  [71] glue_1.8.1                  alabaster.matrix_1.12.0    
     ##  [73] lazyeval_0.2.3              tools_4.6.1                
-    ##  [75] AnnotationHub_4.3.2         data.table_1.18.6.1        
+    ##  [75] AnnotationHub_4.3.3         data.table_1.18.6.1        
     ##  [77] mzR_2.46.0                  QFeatures_1.22.0           
-    ##  [79] rhdf5_2.57.17               grid_4.6.1                 
+    ##  [79] rhdf5_2.57.20               grid_4.6.1                 
     ##  [81] tidyr_1.3.2                 MsCoreUtils_1.25.4         
     ##  [83] AnnotationDbi_1.75.2        HDF5Array_1.40.0           
     ##  [85] cli_3.6.6                   rappdirs_0.3.4             
-    ##  [87] textshaping_1.0.5           S4Arrays_1.13.0            
+    ##  [87] textshaping_1.0.5           S4Arrays_1.13.2            
     ##  [89] dplyr_1.2.1                 AnnotationFilter_1.36.0    
     ##  [91] alabaster.se_1.12.0         sass_0.4.10                
-    ##  [93] digest_0.6.39               SparseArray_1.13.2         
+    ##  [93] digest_0.6.39               SparseArray_1.13.5         
     ##  [95] htmlwidgets_1.6.4           memoise_2.0.1              
     ##  [97] htmltools_0.5.9             pkgdown_2.2.1.9000         
     ##  [99] lifecycle_1.0.5             h5mread_1.4.1              
