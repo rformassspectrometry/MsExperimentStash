@@ -141,7 +141,7 @@ The content of the stash folder is:
 [`library`](https://rdrr.io/r/base/library.html)`(`[`fs`](https://fs.r-lib.org)`)`\
 [`dir_tree`](https://fs.r-lib.org/reference/dir_tree.html)`(``d``)`
 
-    ## /tmp/RtmpClTlnQ/file1db12e6bfaef/mse_stash
+    ## /tmp/RtmpH6IBCT/file1db063052f6e/mse_stash
     ## ├── OBJECT
     ## ├── _environment.json
     ## ├── experiment_files
@@ -275,8 +275,8 @@ restore the `Spectra` object from the *spectra* sub-folder:
     ##  ... 25 more variables/columns.
     ## 
     ## file(s):
-    ## 1b6c4b4cd248_7859
-    ## 1b6c10b11184_7860
+    ## 1b6b162664ee_7859
+    ## 1b6b5f8b4a4a_7860
 
 Or only the `SummarizedExperiment` from the *qdata* sub-folder (using
 *alabaster.base* functions):
@@ -319,8 +319,8 @@ The MS data from our example `MsExperiment` is represented by a
     ##  ... 34 more variables/columns.
     ## 
     ## file(s):
-    ## 1b6c4b4cd248_7859
-    ## 1b6c10b11184_7860
+    ## 1b6b162664ee_7859
+    ## 1b6b5f8b4a4a_7860
 
 This type of backend keeps only the spectra metadata in memory while the
 mass peaks data (*m/z* and intensity values) are retrieved on demand
@@ -351,9 +351,9 @@ expected *mzML* file ending, because the data was provided through the
 `#' Directory content of the spectra subfolder`\
 [`dir_tree`](https://fs.r-lib.org/reference/dir_tree.html)`(`[`file.path`](https://rdrr.io/r/base/file.path.html)`(``d``, ``"spectra"``, ``"backend"``)``)`
 
-    ## /tmp/RtmpClTlnQ/portable_stash/spectra/backend
-    ## ├── 1b6c10b11184_7860
-    ## ├── 1b6c4b4cd248_7859
+    ## /tmp/RtmpH6IBCT/portable_stash/spectra/backend
+    ## ├── 1b6b162664ee_7859
+    ## ├── 1b6b5f8b4a4a_7860
     ## ├── OBJECT
     ## └── spectra_data
     ##     ├── OBJECT
@@ -382,7 +382,7 @@ format) within the stash.
 \
 [`dir_tree`](https://fs.r-lib.org/reference/dir_tree.html)`(`[`file.path`](https://rdrr.io/r/base/file.path.html)`(``d``, ``"spectra"``, ``"backend"``)``)`
 
-    ## /tmp/RtmpClTlnQ/memory_stash/spectra/backend
+    ## /tmp/RtmpH6IBCT/memory_stash/spectra/backend
     ## ├── OBJECT
     ## └── backend
     ##     ├── OBJECT
@@ -589,6 +589,11 @@ downloaded again. Now, if we examine the `sampleData` information:
 
 We can see that it is much simpler.
 
+## License
+
+This vignette is distributed under a [CC BY-SA
+license](https://creativecommons.org/licenses/by-sa/4.0/).
+
 ## Session information
 
 \
@@ -625,7 +630,7 @@ We can see that it is much simpler.
     ##  [9] IRanges_2.47.5              S4Vectors_0.51.10          
     ## [11] BiocGenerics_0.59.13        generics_0.1.4             
     ## [13] MatrixGenerics_1.25.0       matrixStats_1.5.0          
-    ## [15] MsDataHub_1.13.4            MsExperimentStash_0.99.1   
+    ## [15] MsDataHub_1.13.4            MsExperimentStash_0.99.2   
     ## [17] MsStash_0.99.0              MsExperiment_1.14.0        
     ## [19] ProtGenerics_1.45.0         BiocStyle_2.40.0           
     ## 

@@ -250,7 +250,7 @@ saveMsObject(mse, AlabasterParam(d), consolidate = TRUE)
 ## Show the content of the stash folder
 library(fs)
 dir_tree(d)
-#> /tmp/RtmpqNytXT/ms_experiment_stash
+#> /tmp/RtmpBTmyIR/ms_experiment_stash
 #> ├── OBJECT
 #> ├── _environment.json
 #> ├── experiment_files
@@ -280,8 +280,8 @@ dir_tree(d)
 #> └── spectra
 #>     ├── OBJECT
 #>     ├── backend
-#>     │   ├── 1b6c10b11184_7860
-#>     │   ├── 1b6c4b4cd248_7859
+#>     │   ├── 1b6b162664ee_7859
+#>     │   ├── 1b6b5f8b4a4a_7860
 #>     │   ├── OBJECT
 #>     │   └── spectra_data
 #>     │       ├── OBJECT
@@ -313,8 +313,8 @@ sampleData(res)
 #> DataFrame with 2 rows and 3 columns
 #>                          name     index spectraOrigin
 #>                   <character> <integer>   <character>
-#> 1b6c4b4cd248_7859           A         1 /github/ho...
-#> 1b6c10b11184_7860           B         2 /github/ho...
+#> 1b6b162664ee_7859           A         1 /github/ho...
+#> 1b6b5f8b4a4a_7860           B         2 /github/ho...
 
 spectra(res)
 #> MSn data (Spectra) with 1862 spectra in a MsBackendMzR backend:
@@ -334,8 +334,8 @@ spectra(res)
 #>  ... 25 more variables/columns.
 #> 
 #> file(s):
-#> 1b6c4b4cd248_7859
-#> 1b6c10b11184_7860
+#> 1b6b162664ee_7859
+#> 1b6b5f8b4a4a_7860
 
 ## Save the MsExperiment to a stash in plain text format.
 d <- file.path(tempdir(), "ms_experiment_text_stash")
@@ -343,7 +343,7 @@ saveMsObject(mse, PlainTextParam(d))
 
 ## Show the content of the stash folder
 dir_tree(d)
-#> /tmp/RtmpqNytXT/ms_experiment_text_stash
+#> /tmp/RtmpBTmyIR/ms_experiment_text_stash
 #> ├── ms_backend_spectra_data.txt
 #> ├── ms_experiment_link_mcols.txt
 #> ├── ms_experiment_sample_data.txt

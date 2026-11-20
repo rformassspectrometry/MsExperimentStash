@@ -2,6 +2,14 @@
 
 ## *MsExperimentStash* 0.99
 
+### Changes in version 0.99.2
+
+- Fix licensing.
+
+### Changes in version 0.99.1
+
+- Address Bioconductor reviewer comments.
+
 ### Changes in version 0.99.0
 
 - Prepare and clean package for submission to Bioconductor.

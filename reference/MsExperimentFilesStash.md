@@ -97,7 +97,7 @@ saveMsObject(fls, AlabasterParam(d))
 ## saved through the *alabaster.base* package.
 library(fs)
 dir_tree(d)
-#> /tmp/RtmpqNytXT/ms_file_stash
+#> /tmp/RtmpBTmyIR/ms_file_stash
 #> ├── OBJECT
 #> ├── _environment.json
 #> └── x

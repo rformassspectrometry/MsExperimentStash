@@ -84,8 +84,11 @@ If you’re planning to contribute:
 
 ## 📄 License
 
-This package is licensed under the [**GPL 3.0
-License**](https://opensource.org/license/gpl-3.0) license.
+The *MsExperimentStash* code is provided under a
+[GPL-3](https://opensource.org/license/gpl-3.0) license. The
+documentation, including the manual pages and the vignettes, are
+distributed under a [CC
+BY-SA](https://creativecommons.org/licenses/by-sa/4.0/) license.
 
 ------------------------------------------------------------------------
 
