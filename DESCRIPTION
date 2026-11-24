@@ -1,6 +1,6 @@
 Package: MsExperimentStash
 Title: Save and restore MsExperiment objects in interoperable file formats
-Version: 1.1.0
+Version: 1.1.1
 Authors@R:
     c(person(given = "Johannes", family = "Rainer",
              email = "Johannes.Rainer@eurac.edu",

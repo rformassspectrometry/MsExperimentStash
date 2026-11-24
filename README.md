@@ -54,6 +54,10 @@ BiocManager::install("MsExperimentStash")
 - Load MS data and experimental metadata for metabolomics studies from the
   [MetaboLights](https://www.ebi.ac.uk/metabolights/) repository,
 
+### ⤵️ Retrieve data directly from Metabolomics Workbench (`MwbParam`)
+- Load MS data and experimental metadata for metabolomics studies from the
+  [Metabolomics Workbench](https://www.metabolomicsworkbench.org/) repository,
+
 ---
 
 ## Contributing
