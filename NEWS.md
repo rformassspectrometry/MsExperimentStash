@@ -1,3 +1,9 @@
+# *MsExperimentStash* 1.1
+
+## Changes in version 1.1.1
+
+- Update README to mention Metabolomics Workbench.
+
 # *MsExperimentStash* 0.99
 
 ## Changes in version 0.99.3
